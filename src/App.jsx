@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Disclaimer from './components/Disclaimer'
+import BackToTop from './components/BackToTop'
 import Hero from './sections/Hero'
 import SituationPicker from './sections/SituationPicker'
 import UnderstandingAnxiety from './sections/UnderstandingAnxiety'
@@ -55,6 +56,7 @@ function App() {
       </main>
 
       <Footer />
+      <BackToTop />
     </div>
   )
 }

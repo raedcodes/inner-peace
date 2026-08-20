@@ -1,5 +1,5 @@
 import SectionHeading from '../components/SectionHeading'
-import InformationCard from '../components/InformationCard'
+import LifestyleCard from '../components/LifestyleCard'
 import { lifestyleTopics } from '../data/lifestyleTips'
 import { useLanguage } from '../i18n/LanguageContext'
 
@@ -40,17 +40,14 @@ export default function Lifestyle() {
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {topics.map((topic) => (
-          <InformationCard key={topic.id} id={`lifestyle-${topic.id}`} title={topic.title} icon={icons[topic.id]}>
-            <p className="mb-3">{topic.summary}</p>
-            <ul className="space-y-1.5">
-              {topic.points.map((point) => (
-                <li key={point} className="flex gap-2 text-sm">
-                  <span className="text-sage-dark shrink-0" aria-hidden="true">•</span>
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-          </InformationCard>
+          <LifestyleCard
+            key={topic.id}
+            id={`lifestyle-${topic.id}`}
+            title={topic.title}
+            icon={icons[topic.id]}
+            summary={topic.summary}
+            points={topic.points}
+          />
         ))}
       </div>
     </section>

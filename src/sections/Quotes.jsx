@@ -16,9 +16,11 @@ export default function Quotes() {
     <section id="quotes" className="max-w-6xl mx-auto px-5 md:px-8 py-16 md:py-24 scroll-mt-20">
       <SectionHeading eyebrow={t.eyebrow} title={t.title} align="center" />
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-2 -mx-5 px-5 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-5 sm:overflow-visible">
         {quotes[lang].map((quote) => (
-          <QuoteCard key={quote.text} quote={quote} />
+          <div key={quote.text} className="w-[80%] shrink-0 snap-start sm:w-auto sm:shrink">
+            <QuoteCard quote={quote} />
+          </div>
         ))}
       </div>
     </section>

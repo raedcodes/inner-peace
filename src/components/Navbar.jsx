@@ -81,6 +81,7 @@ export default function Navbar() {
   const closeMenu = () => setMenuOpen(false)
 
   return (
+    <>
     <header
       className={`sticky top-0 z-30 transition-colors duration-300 ${
         scrolled ? 'bg-cream/90 backdrop-blur-md shadow-sm' : 'bg-transparent'
@@ -135,27 +136,28 @@ export default function Navbar() {
           </button>
         </div>
       </nav>
-
-      {menuOpen && (
-        <div
-          id="mobile-menu"
-          className="xl:hidden fixed inset-x-0 top-[64px] bottom-0 bg-cream z-20 overflow-y-auto"
-        >
-          <ul className="flex flex-col px-6 py-6 gap-1">
-            {t.links.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={closeMenu}
-                  className="block py-3 text-lg text-ink border-b border-ink/5"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </header>
+
+    {menuOpen && (
+      <div
+        id="mobile-menu"
+        className="xl:hidden fixed inset-x-0 top-16 bottom-0 bg-cream z-20 overflow-y-auto"
+      >
+        <ul className="flex flex-col px-6 py-6 gap-1">
+          {t.links.map((link) => (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                onClick={closeMenu}
+                className="block py-3 text-lg text-ink border-b border-ink/5"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+    </>
   )
 }
