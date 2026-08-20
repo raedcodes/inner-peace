@@ -132,7 +132,6 @@ export default async (req, context) => {
           responseSchema,
           temperature: 0.6,
           maxOutputTokens: 1024,
-          thinkingConfig: { thinkingBudget: 0 },
         },
       }),
     })

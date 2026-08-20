@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://inner-peace.netlify.app/sitemap.xml
+Sitemap: https://innerpeace-guide.netlify.app/sitemap.xml

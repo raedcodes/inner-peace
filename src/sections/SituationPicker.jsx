@@ -52,6 +52,12 @@ export default function SituationPicker() {
     run({ customText: customText.trim(), lang })
   }
 
+  const pickAnother = () => {
+    setSelectedId(null)
+    setCustomText('')
+    reset()
+  }
+
   const resolvedResources =
     status === 'success' && data
       ? isCustom
@@ -109,6 +115,7 @@ export default function SituationPicker() {
             error={error}
             resources={resolvedResources}
             onRetry={retry}
+            onPickAnother={pickAnother}
           />
         </div>
       )}

@@ -36,24 +36,21 @@ const copy = {
 
 function LanguageSwitch({ lang, setLang, className = '' }) {
   return (
-    <div className={`inline-flex items-center rounded-full bg-ink/5 p-1 text-xs font-medium ${className}`}>
+    <div className={`inline-flex items-center gap-1.5 text-sm font-medium ${className}`}>
       <button
         type="button"
         onClick={() => setLang('en')}
         aria-pressed={lang === 'en'}
-        className={`px-2.5 py-1 rounded-full transition-colors ${
-          lang === 'en' ? 'bg-white text-ink shadow-soft' : 'text-ink-soft'
-        }`}
+        className={`transition-colors ${lang === 'en' ? 'text-ink' : 'text-ink-soft/50 hover:text-ink-soft'}`}
       >
         EN
       </button>
+      <span className="text-ink-soft/30" aria-hidden="true">/</span>
       <button
         type="button"
         onClick={() => setLang('ar')}
         aria-pressed={lang === 'ar'}
-        className={`px-2.5 py-1 rounded-full transition-colors ${
-          lang === 'ar' ? 'bg-white text-ink shadow-soft' : 'text-ink-soft'
-        }`}
+        className={`transition-colors ${lang === 'ar' ? 'text-ink' : 'text-ink-soft/50 hover:text-ink-soft'}`}
       >
         AR
       </button>
@@ -89,13 +86,13 @@ export default function Navbar() {
         scrolled ? 'bg-cream/90 backdrop-blur-md shadow-sm' : 'bg-transparent'
       }`}
     >
-      <nav className="max-w-6xl mx-auto flex items-center justify-between gap-4 px-5 md:px-8 py-4" aria-label="Primary">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between gap-6 px-5 md:px-8 py-4" aria-label="Primary">
         <a href="#top" className="flex items-center gap-2 text-ink font-serif text-lg font-medium shrink-0">
           <span aria-hidden="true">🌿</span>
           Inner Peace
         </a>
 
-        <ul className="hidden xl:flex items-center gap-4 xl:gap-6 min-w-0">
+        <ul className="hidden xl:flex items-center gap-6 xl:gap-8 min-w-0">
           {t.links.map((link) => (
             <li key={link.href} className="shrink-0">
               <a href={link.href} className="text-sm text-ink-soft hover:text-ink transition-colors whitespace-nowrap">
@@ -105,7 +102,7 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden xl:flex items-center gap-3 shrink-0">
+        <div className="hidden xl:flex items-center gap-5 shrink-0">
           <LanguageSwitch lang={lang} setLang={setLang} />
           <a
             href="#tools"
