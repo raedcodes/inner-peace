@@ -16,7 +16,7 @@ export default function SymptomCard({ category, isOpen, onToggle }) {
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={panelId}
-        className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
+        className="w-full flex items-center justify-between gap-4 px-6 py-5 text-start"
       >
         <div>
           <span className="text-xs font-semibold uppercase tracking-wide">{category.label}</span>

@@ -3,6 +3,7 @@
 @theme {
   --font-sans: "Inter", system-ui, sans-serif;
   --font-serif: "Fraunces", Georgia, serif;
+  --font-arabic: "Cairo", system-ui, sans-serif;
 
   --color-cream: #faf7f2;
   --color-cream-dark: #f2ede3;
@@ -51,6 +52,17 @@
   h3,
   h4 {
     font-family: var(--font-serif);
+  }
+
+  html[dir="rtl"] body {
+    font-family: var(--font-arabic);
+  }
+
+  html[dir="rtl"] h1,
+  html[dir="rtl"] h2,
+  html[dir="rtl"] h3,
+  html[dir="rtl"] h4 {
+    font-family: var(--font-arabic);
   }
 
   :focus-visible {

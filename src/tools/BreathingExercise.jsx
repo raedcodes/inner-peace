@@ -1,15 +1,43 @@
 import { useEffect, useRef, useState } from 'react'
 import { useReducedMotion } from '../hooks/useReducedMotion'
+import { useLanguage } from '../i18n/LanguageContext'
 
-const PHASES = [
-  { key: 'in', label: 'Breathe in', seconds: 4, scale: 1.15 },
-  { key: 'hold', label: 'Hold', seconds: 4, scale: 1.15 },
-  { key: 'out', label: 'Breathe out', seconds: 6, scale: 0.85 },
-]
+const PHASES = {
+  en: [
+    { key: 'in', label: 'Breathe in', seconds: 4, scale: 1.15 },
+    { key: 'hold', label: 'Hold', seconds: 4, scale: 1.15 },
+    { key: 'out', label: 'Breathe out', seconds: 6, scale: 0.85 },
+  ],
+  ar: [
+    { key: 'in', label: 'شهيق', seconds: 4, scale: 1.15 },
+    { key: 'hold', label: 'احبس', seconds: 4, scale: 1.15 },
+    { key: 'out', label: 'زفير', seconds: 6, scale: 0.85 },
+  ],
+}
+
+const copy = {
+  en: {
+    ready: 'Ready?',
+    start: 'Start breathing exercise',
+    stop: 'Stop',
+    seconds: (n) => `${n}s`,
+    note: 'A gentle breathing rhythm may help you feel a bit steadier in the moment — it is not a treatment for every anxiety symptom.',
+  },
+  ar: {
+    ready: 'مستعد؟',
+    start: 'ابدأ تمرين التنفس',
+    stop: 'إيقاف',
+    seconds: (n) => `${n} ث`,
+    note: 'إيقاع تنفس لطيف قد يساعدك على الشعور بثبات أكبر في اللحظة — لكنه ليس علاجًا لكل أعراض القلق.',
+  },
+}
 
 export default function BreathingExercise() {
+  const { lang } = useLanguage()
+  const t = copy[lang]
+  const phases = PHASES[lang]
   const [running, setRunning] = useState(false)
-  const [cycle, setCycle] = useState({ phaseIndex: 0, secondsLeft: PHASES[0].seconds })
+  const [cycle, setCycle] = useState({ phaseIndex: 0, secondsLeft: phases[0].seconds })
   const prefersReduced = useReducedMotion()
   const intervalRef = useRef(null)
 
@@ -24,19 +52,19 @@ export default function BreathingExercise() {
         if (prev.secondsLeft > 1) {
           return { ...prev, secondsLeft: prev.secondsLeft - 1 }
         }
-        const nextPhaseIndex = (prev.phaseIndex + 1) % PHASES.length
-        return { phaseIndex: nextPhaseIndex, secondsLeft: PHASES[nextPhaseIndex].seconds }
+        const nextPhaseIndex = (prev.phaseIndex + 1) % phases.length
+        return { phaseIndex: nextPhaseIndex, secondsLeft: phases[nextPhaseIndex].seconds }
       })
     }, 1000)
 
     return () => clearInterval(intervalRef.current)
-  }, [running])
+  }, [running, phases])
 
-  const phase = PHASES[cycle.phaseIndex]
+  const phase = phases[cycle.phaseIndex]
 
   const toggle = () => {
     if (!running) {
-      setCycle({ phaseIndex: 0, secondsLeft: PHASES[0].seconds })
+      setCycle({ phaseIndex: 0, secondsLeft: phases[0].seconds })
     }
     setRunning((v) => !v)
   }
@@ -63,8 +91,8 @@ export default function BreathingExercise() {
           aria-hidden="true"
         />
         <div className="relative z-10 text-center">
-          <p className="text-ink font-medium">{running ? phase.label : 'Ready?'}</p>
-          {running && <p className="text-ink-soft text-sm mt-1">{cycle.secondsLeft}s</p>}
+          <p className="text-ink font-medium">{running ? phase.label : t.ready}</p>
+          {running && <p className="text-ink-soft text-sm mt-1">{t.seconds(cycle.secondsLeft)}</p>}
         </div>
       </div>
 
@@ -74,13 +102,10 @@ export default function BreathingExercise() {
         className="rounded-full bg-dusk-dark text-white px-6 py-2.5 text-sm font-medium hover:bg-dusk-dark/90 transition-colors"
         aria-live="polite"
       >
-        {running ? 'Stop' : 'Start breathing exercise'}
+        {running ? t.stop : t.start}
       </button>
 
-      <p className="text-xs text-ink-soft/80 mt-4 max-w-xs leading-relaxed">
-        A gentle breathing rhythm may help you feel a bit steadier in the moment — it is not a treatment for every
-        anxiety symptom.
-      </p>
+      <p className="text-xs text-ink-soft/80 mt-4 max-w-xs leading-relaxed">{t.note}</p>
     </div>
   )
 }

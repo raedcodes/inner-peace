@@ -1,11 +1,38 @@
 import { useEffect, useRef, useState } from 'react'
 import { useReducedMotion } from '../hooks/useReducedMotion'
+import { useLanguage } from '../i18n/LanguageContext'
 
-const DURATIONS = [
-  { label: '5 min', seconds: 5 * 60 },
-  { label: '10 min', seconds: 10 * 60 },
-  { label: '15 min', seconds: 15 * 60 },
-]
+const DURATIONS = {
+  en: [
+    { label: '5 min', seconds: 5 * 60 },
+    { label: '10 min', seconds: 10 * 60 },
+    { label: '15 min', seconds: 15 * 60 },
+  ],
+  ar: [
+    { label: '٥ دقائق', seconds: 5 * 60 },
+    { label: '١٠ دقائق', seconds: 10 * 60 },
+    { label: '١٥ دقيقة', seconds: 15 * 60 },
+  ],
+}
+
+const copy = {
+  en: {
+    instructions:
+      'Get comfortable. Let your shoulders drop, soften your jaw, and let your breath settle into its own pace. There is nowhere else you need to be right now.',
+    pause: 'Pause',
+    restart: 'Restart',
+    start: 'Start',
+    playAudio: 'Play calm background sound',
+  },
+  ar: {
+    instructions:
+      'اجعل وضعيتك مريحة. أرخِ كتفيك، ولن فكّيك، ودع تنفسك يستقر على وتيرته الخاصة. لا مكان آخر تحتاج أن تكون فيه الآن.',
+    pause: 'إيقاف مؤقت',
+    restart: 'إعادة البدء',
+    start: 'ابدأ',
+    playAudio: 'تشغيل صوت خلفية هادئ',
+  },
+}
 
 function formatTime(totalSeconds) {
   const minutes = Math.floor(totalSeconds / 60)
@@ -14,8 +41,11 @@ function formatTime(totalSeconds) {
 }
 
 export default function RelaxationTimer() {
-  const [duration, setDuration] = useState(DURATIONS[0].seconds)
-  const [secondsLeft, setSecondsLeft] = useState(DURATIONS[0].seconds)
+  const { lang } = useLanguage()
+  const t = copy[lang]
+  const durations = DURATIONS[lang]
+  const [duration, setDuration] = useState(durations[0].seconds)
+  const [secondsLeft, setSecondsLeft] = useState(durations[0].seconds)
   const [running, setRunning] = useState(false)
   const [playAudio, setPlayAudio] = useState(false)
   const prefersReduced = useReducedMotion()
@@ -56,7 +86,7 @@ export default function RelaxationTimer() {
   return (
     <div className="text-center">
       <div className="flex justify-center gap-2 mb-6">
-        {DURATIONS.map((d) => (
+        {durations.map((d) => (
           <button
             key={d.label}
             type="button"
@@ -89,13 +119,12 @@ export default function RelaxationTimer() {
             style={{ transition: prefersReduced ? 'none' : 'stroke-dashoffset 1s linear' }}
           />
         </svg>
-        <span className="relative text-2xl font-serif text-ink">{formatTime(secondsLeft)}</span>
+        <span className="relative text-2xl font-serif text-ink" dir="ltr">
+          {formatTime(secondsLeft)}
+        </span>
       </div>
 
-      <p className="text-sm text-ink-soft max-w-xs mx-auto mb-5 leading-relaxed">
-        Get comfortable. Let your shoulders drop, soften your jaw, and let your breath settle into its own pace.
-        There is nowhere else you need to be right now.
-      </p>
+      <p className="text-sm text-ink-soft max-w-xs mx-auto mb-5 leading-relaxed">{t.instructions}</p>
 
       <div className="flex flex-col items-center gap-3">
         <button
@@ -103,7 +132,7 @@ export default function RelaxationTimer() {
           onClick={toggle}
           className="rounded-full bg-dusk-dark text-white px-6 py-2.5 text-sm font-medium hover:bg-dusk-dark/90 transition-colors"
         >
-          {running ? 'Pause' : secondsLeft === 0 ? 'Restart' : 'Start'}
+          {running ? t.pause : secondsLeft === 0 ? t.restart : t.start}
         </button>
 
         <label className="flex items-center gap-2 text-xs text-ink-soft">
@@ -113,7 +142,7 @@ export default function RelaxationTimer() {
             onChange={(e) => setPlayAudio(e.target.checked)}
             className="rounded border-ink/20"
           />
-          Play calm background sound
+          {t.playAudio}
         </label>
       </div>
 
