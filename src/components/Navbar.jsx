@@ -89,7 +89,8 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto flex items-center justify-between gap-6 px-5 md:px-8 py-4" aria-label="Primary">
         <a href="#top" className="flex items-center gap-2 text-ink font-serif text-lg font-medium shrink-0">
           <span aria-hidden="true">🌿</span>
-          Inner Peace
+          <span className="hidden min-[380px]:inline">Inner Peace</span>
+          <span className="sr-only min-[380px]:hidden">Inner Peace</span>
         </a>
 
         <ul className="hidden xl:flex items-center gap-6 xl:gap-8 min-w-0">
@@ -112,10 +113,10 @@ export default function Navbar() {
           </a>
         </div>
 
-        <div className="flex items-center gap-2 xl:hidden">
+        <div className="flex items-center gap-1.5 min-[380px]:gap-2 xl:hidden">
           <a
             href="#tools"
-            className="inline-flex items-center rounded-full bg-sage text-white px-4 py-2 text-sm font-medium hover:bg-sage-dark transition-colors shadow-soft whitespace-nowrap"
+            className="inline-flex items-center rounded-full bg-sage text-white px-3 py-1.5 min-[380px]:px-4 min-[380px]:py-2 text-xs min-[380px]:text-sm font-medium hover:bg-sage-dark transition-colors shadow-soft whitespace-nowrap"
           >
             {t.cta}
           </a>
