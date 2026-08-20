@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { startTool } from '../lib/startTool'
 
 const copy = {
   en: {
@@ -7,6 +8,7 @@ const copy = {
     retry: 'Try again',
     resourcesTitle: 'On this site',
     tryThis: 'Try this',
+    startNow: (label) => `▶ Start ${label} now`,
     disclaimer:
       'This is general, educational support — not a diagnosis or a treatment plan. If this feels urgent or serious, please reach out to a doctor or mental-health professional.',
     checkInPrompt: 'Did that help, even a little?',
@@ -24,6 +26,7 @@ const copy = {
     retry: 'حاول مرة أخرى',
     resourcesTitle: 'على هذا الموقع',
     tryThis: 'جرّب هذا',
+    startNow: (label) => `▶ ابدأ ${label} الآن`,
     disclaimer:
       'هذا دعم تثقيفي عام — وليس تشخيصًا أو خطة علاج. إذا شعرت أن الأمر عاجل أو خطير، يُرجى التواصل مع طبيب أو أخصائي صحة نفسية.',
     checkInPrompt: 'هل ساعدك هذا، ولو قليلاً؟',
@@ -87,17 +90,32 @@ export default function RecommendationPanel({ lang, status, data, error, resourc
 
         {resources && resources.length > 0 && (
           <div className="mb-5">
-            <p className="text-xs font-semibold uppercase tracking-wide text-sage-dark mb-2">{t.resourcesTitle}</p>
-            <div className="flex flex-wrap gap-2">
-              {resources.map((resource) => (
-                <a
+            {resources
+              .filter((r) => r.href.startsWith('#tool-'))
+              .map((resource) => (
+                <button
                   key={resource.href}
-                  href={resource.href}
-                  className="text-sm rounded-full bg-sage-light text-sage-dark px-3.5 py-1.5 hover:bg-sage/20 transition-colors"
+                  type="button"
+                  onClick={() => startTool(resource.href)}
+                  className="block w-full sm:w-auto mb-2 rounded-full bg-sage text-white px-4 py-2 text-sm font-medium hover:bg-sage-dark transition-colors"
                 >
-                  {resource.label}
-                </a>
+                  {t.startNow(resource.label)}
+                </button>
               ))}
+
+            <p className="text-xs font-semibold uppercase tracking-wide text-sage-dark mb-2 mt-1">{t.resourcesTitle}</p>
+            <div className="flex flex-wrap gap-2">
+              {resources
+                .filter((r) => !r.href.startsWith('#tool-'))
+                .map((resource) => (
+                  <a
+                    key={resource.href}
+                    href={resource.href}
+                    className="text-sm rounded-full bg-sage-light text-sage-dark px-3.5 py-1.5 hover:bg-sage/20 transition-colors"
+                  >
+                    {resource.label}
+                  </a>
+                ))}
             </div>
           </div>
         )}

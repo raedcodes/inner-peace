@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
+import { START_TOOL_EVENT } from '../lib/startTool'
 
 const sessions = {
   en: [
@@ -30,7 +31,7 @@ const rangeThumbClasses =
   '[&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3.5 [&::-webkit-slider-thumb]:h-3.5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-sage-dark [&::-webkit-slider-thumb]:cursor-pointer ' +
   '[&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:w-3.5 [&::-moz-range-thumb]:h-3.5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-sage-dark [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer'
 
-function AudioTrack({ title, file, playingId, onPlay }) {
+function AudioTrack({ title, file, playingId, onPlay, autoStartKey }) {
   const { lang } = useLanguage()
   const t = copy[lang]
   const audioRef = useRef(null)
@@ -46,6 +47,18 @@ function AudioTrack({ title, file, playingId, onPlay }) {
       audioRef.current?.pause()
     }
   }, [isActive, isPlaying])
+
+  useEffect(() => {
+    if (!autoStartKey) return
+    const onStartTool = (event) => {
+      if (event.detail?.tool === autoStartKey) {
+        onPlay(file)
+        audioRef.current?.play().catch(() => setMissing(true))
+      }
+    }
+    window.addEventListener(START_TOOL_EVENT, onStartTool)
+    return () => window.removeEventListener(START_TOOL_EVENT, onStartTool)
+  }, [autoStartKey, file, onPlay])
 
   const toggle = () => {
     const audio = audioRef.current
@@ -140,13 +153,14 @@ export default function CalmAudioPlayer() {
 
   return (
     <div className="space-y-4">
-      {list.map((session) => (
+      {list.map((session, index) => (
         <AudioTrack
           key={session.id}
           title={session.title}
           file={session.file}
           playingId={playingId}
           onPlay={setPlayingId}
+          autoStartKey={index === 0 ? 'calm-audio' : undefined}
         />
       ))}
     </div>

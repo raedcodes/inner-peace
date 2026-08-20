@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import { useLanguage } from '../i18n/LanguageContext'
+import { START_TOOL_EVENT } from '../lib/startTool'
 
 const DURATIONS = {
   en: [
@@ -80,6 +81,18 @@ export default function RelaxationTimer() {
     if (secondsLeft === 0) setSecondsLeft(duration)
     setRunning((v) => !v)
   }
+
+  useEffect(() => {
+    const onStartTool = (event) => {
+      if (event.detail?.tool === 'relaxation-timer') {
+        setSecondsLeft((s) => (s === 0 ? duration : s))
+        setRunning(true)
+      }
+    }
+    window.addEventListener(START_TOOL_EVENT, onStartTool)
+    return () => window.removeEventListener(START_TOOL_EVENT, onStartTool)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [duration])
 
   const progress = 1 - secondsLeft / duration
 

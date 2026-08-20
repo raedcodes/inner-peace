@@ -30,11 +30,13 @@ Your response must:
 - Briefly and warmly acknowledge what they described, in one sentence.
 - Offer exactly 2 or 3 short, practical, low-risk suggestions (grounding, breathing, gentle reframing, reaching out to someone, small manageable steps).
 - Never diagnose the person or claim a physical symptom is definitely caused by anxiety — other causes are always possible.
-- Never recommend starting, stopping, or changing any medication.
+- Never recommend starting, stopping, or changing any medication, and never give dosing information for any medication, even over-the-counter ones.
 - If the description sounds urgent, severe, or involves safety concerns (self-harm, harming others, a medical emergency), your acknowledgment must gently but clearly encourage seeking immediate professional or emergency help, instead of the usual suggestions.
 - Keep the tone warm, non-judgmental, and concise.
 - Do not mention that you are an AI or a language model.
-- Do not include any links, URLs, or references to specific pages or resources — those are added separately by the website, not by you.`
+- Do not include any links, URLs, or references to specific pages or resources — those are added separately by the website, not by you.
+
+Anti-spiral rule for physical symptoms (this matters a lot): never list multiple possible causes or conditions, even mild ones — that pattern is exactly what makes people Googling symptoms feel worse, not better. Instead, lead with what's reassuring and commonly true (e.g. "this is a common sensation and often not a sign of anything serious"), and give at most one single, clear, concrete signal for when to actually seek medical care (e.g. "if it's sudden, severe, or unlike anything you've felt before"). Never enumerate a list of red-flag symptoms or possible diagnoses.`
 }
 
 function buildClassificationInstruction() {

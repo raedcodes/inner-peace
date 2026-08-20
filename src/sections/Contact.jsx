@@ -7,7 +7,7 @@ const copy = {
     eyebrow: 'Reach Out',
     title: 'Want to talk to someone?',
     description:
-      "This isn't therapy, counseling, or a crisis service — just a genuine, listening ear if you'd like to chit-chat, get something off your chest, or aren't sure who else to tell. Messages go directly and privately — they aren't shared, sold, or posted anywhere.",
+      "This isn't therapy, counseling, or a crisis service — just a genuine, listening ear if you'd like to chit-chat, get something off your chest, or aren't sure who else to tell. Mental health isn't abstract to me either — I've been through my own share of it, which is part of why this site exists. Messages go directly and privately — they aren't shared, sold, or posted anywhere.",
     nameLabel: 'Your name',
     optional: '(optional)',
     emailLabel: 'Your email',
@@ -25,7 +25,7 @@ const copy = {
     eyebrow: 'تواصل معنا',
     title: 'تريد التحدث إلى أحد؟',
     description:
-      'هذه ليست جلسة علاج أو استشارة أو خدمة أزمات — بل مجرد أذن صاغية إن أردت الدردشة، أو تفريغ ما بداخلك، أو لست متأكدًا لمن تخبره. تصل الرسائل مباشرة وبخصوصية تامة — لا تُشارَك أو تُباع أو تُنشر في أي مكان.',
+      'هذه ليست جلسة علاج أو استشارة أو خدمة أزمات — بل مجرد أذن صاغية إن أردت الدردشة، أو تفريغ ما بداخلك، أو لست متأكدًا لمن تخبره. الصحة النفسية ليست أمرًا بعيدًا عني أيضًا — فقد مررت بتجربتي الخاصة معها، وهذا جزء من سبب وجود هذا الموقع. تصل الرسائل مباشرة وبخصوصية تامة — لا تُشارَك أو تُباع أو تُنشر في أي مكان.',
     nameLabel: 'اسمك',
     optional: '(اختياري)',
     emailLabel: 'بريدك الإلكتروني',

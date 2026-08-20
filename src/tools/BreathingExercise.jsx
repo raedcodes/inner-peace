@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import { useLanguage } from '../i18n/LanguageContext'
+import { START_TOOL_EVENT } from '../lib/startTool'
 
 const PHASES = {
   en: [
@@ -62,12 +63,27 @@ export default function BreathingExercise() {
 
   const phase = phases[cycle.phaseIndex]
 
-  const toggle = () => {
-    if (!running) {
-      setCycle({ phaseIndex: 0, secondsLeft: phases[0].seconds })
-    }
-    setRunning((v) => !v)
+  const start = () => {
+    setCycle({ phaseIndex: 0, secondsLeft: phases[0].seconds })
+    setRunning(true)
   }
+
+  const toggle = () => {
+    if (running) {
+      setRunning(false)
+    } else {
+      start()
+    }
+  }
+
+  useEffect(() => {
+    const onStartTool = (event) => {
+      if (event.detail?.tool === 'breathing') start()
+    }
+    window.addEventListener(START_TOOL_EVENT, onStartTool)
+    return () => window.removeEventListener(START_TOOL_EVENT, onStartTool)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const circleScale = running ? phase.scale : 1
 
