@@ -1,6 +1,6 @@
 import { situationIds, situations } from '../../src/data/situations.js'
 
-const MODEL = 'gemini-2.5-flash'
+const MODEL = process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite'
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`
 
 const MAX_CUSTOM_TEXT_LENGTH = 500
@@ -131,12 +131,15 @@ export default async (req, context) => {
           responseMimeType: 'application/json',
           responseSchema,
           temperature: 0.6,
-          maxOutputTokens: 400,
+          maxOutputTokens: 1024,
+          thinkingConfig: { thinkingBudget: 0 },
         },
       }),
     })
 
     if (!geminiResponse.ok) {
+      const errorBody = await geminiResponse.text().catch(() => '')
+      console.error('Gemini API error', geminiResponse.status, errorBody)
       return jsonResponse(502, { error: 'Could not reach the assistant right now.' })
     }
 
@@ -146,7 +149,13 @@ export default async (req, context) => {
       return jsonResponse(502, { error: 'Received an empty response.' })
     }
 
-    const parsed = JSON.parse(text)
+    let parsed
+    try {
+      parsed = JSON.parse(text)
+    } catch (parseErr) {
+      console.error('Failed to parse Gemini response as JSON:', parseErr.message, 'Raw text:', text)
+      return jsonResponse(502, { error: 'Received a malformed response.' })
+    }
 
     if (!parsed.acknowledgment || !Array.isArray(parsed.suggestions) || parsed.suggestions.length === 0) {
       return jsonResponse(502, { error: 'Received an unexpected response shape.' })
@@ -164,7 +173,8 @@ export default async (req, context) => {
     }
 
     return jsonResponse(200, result)
-  } catch {
+  } catch (err) {
+    console.error('situation-support function error:', err)
     return jsonResponse(500, { error: 'Something went wrong. Please try again.' })
   }
 }

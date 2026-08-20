@@ -27,3 +27,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local Netlify folder
+.netlify
+
+# Netlify CLI's own Deno/Edge Functions bootstrap artifact — not a project dependency
+deno.lock
