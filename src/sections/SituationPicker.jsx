@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import SectionHeading from '../components/SectionHeading'
 import SituationCard from '../components/SituationCard'
 import RecommendationPanel from '../components/RecommendationPanel'
@@ -34,6 +34,13 @@ export default function SituationPicker() {
   const [selectedId, setSelectedId] = useState(null)
   const [customText, setCustomText] = useState('')
   const { status, data, error, run, retry, reset } = useSituationSupport()
+  const panelRef = useRef(null)
+
+  useEffect(() => {
+    if (status !== 'idle') {
+      panelRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    }
+  }, [status])
 
   const selectedSituation = list.find((s) => s.id === selectedId)
   const isCustom = selectedId === 'something-else'
@@ -110,7 +117,7 @@ export default function SituationPicker() {
       )}
 
       {status !== 'idle' && (
-        <div className="max-w-xl mx-auto">
+        <div ref={panelRef} className="max-w-xl mx-auto scroll-mt-24">
           <RecommendationPanel
             lang={lang}
             status={status}
