@@ -19,6 +19,8 @@ const copy = {
       "That's okay, not everything lands the same for everyone. If this keeps coming up, it may be worth talking it through with a professional.",
     pickAnother: 'Pick a different situation',
     seeTherapy: 'When therapy may help',
+    patternAlert: (count, title) =>
+      `This is the ${count}${count === 1 ? 'st' : count === 2 ? 'nd' : count === 3 ? 'rd' : 'th'} time this week you've checked in about "${title}" — that's worth more than a quick tip. It may be worth talking to a professional about this pattern.`,
   },
   ar: {
     loading: 'جارٍ إيجاد بعض الاقتراحات اللطيفة...',
@@ -36,10 +38,22 @@ const copy = {
     noResponse: 'لا بأس، ليس كل شيء يناسب الجميع بالطريقة نفسها. إذا استمر هذا معك، قد يكون من المفيد التحدث عنه مع مختص.',
     pickAnother: 'اختر موقفًا مختلفًا',
     seeTherapy: 'متى قد يساعد العلاج النفسي',
+    patternAlert: (count, title) =>
+      `سجّلت "${title}" ${count} مرات هذا الأسبوع — وهذا يستحق أكثر من نصيحة سريعة. قد يكون من المفيد التحدث عن هذا النمط مع مختص.`,
   },
 }
 
-export default function RecommendationPanel({ lang, status, data, error, resources, onRetry, onPickAnother }) {
+export default function RecommendationPanel({
+  lang,
+  status,
+  data,
+  error,
+  resources,
+  onRetry,
+  onPickAnother,
+  patternCount = 0,
+  patternTitle,
+}) {
   const t = copy[lang]
   const [feedback, setFeedback] = useState(null)
 
@@ -76,6 +90,12 @@ export default function RecommendationPanel({ lang, status, data, error, resourc
   if (status === 'success' && data) {
     return (
       <div className="rounded-2xl bg-white/70 border border-ink/5 shadow-soft p-6 md:p-7" aria-live="polite">
+        {patternCount > 0 && patternTitle && (
+          <div className="rounded-xl bg-clay/10 border border-clay/30 px-4 py-3 mb-4">
+            <p className="text-sm text-ink leading-relaxed">{t.patternAlert(patternCount, patternTitle)}</p>
+          </div>
+        )}
+
         <p className="text-ink leading-relaxed mb-4">{data.acknowledgment}</p>
 
         <p className="text-xs font-semibold uppercase tracking-wide text-sage-dark mb-2">{t.tryThis}</p>

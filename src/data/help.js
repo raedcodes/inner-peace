@@ -60,3 +60,105 @@ export const medicationPoints = {
     'يُستخدم العلاج وتغييرات نمط الحياة والدواء معًا أحيانًا، بحسب احتياجات الشخص.',
   ],
 }
+
+// Kept only so previously-saved entries (from the old 7-field journal) still
+// display correctly in "view saved entries" — the new journal saves in the
+// journalSteps shape below instead.
+export const journalPrompts = {
+  en: [
+    { key: 'feeling', label: 'What am I feeling?' },
+    { key: 'situation', label: 'What happened?' },
+    { key: 'thoughts', label: 'What thoughts am I having?' },
+    { key: 'worry', label: 'What am I worried about?' },
+    { key: 'evidence', label: 'What evidence supports this thought?' },
+    { key: 'perspective', label: 'What might be another perspective?' },
+    { key: 'control', label: 'What can I control right now?' },
+  ],
+  ar: [
+    { key: 'feeling', label: 'بماذا أشعر؟' },
+    { key: 'situation', label: 'ماذا حدث؟' },
+    { key: 'thoughts', label: 'ما الأفكار التي تراودني؟' },
+    { key: 'worry', label: 'ما الذي يقلقني؟' },
+    { key: 'evidence', label: 'ما الدليل الذي يدعم هذه الفكرة؟' },
+    { key: 'perspective', label: 'ما وجهة نظر أخرى ممكنة؟' },
+    { key: 'control', label: 'ما الذي أستطيع التحكم به الآن؟' },
+  ],
+}
+
+export const journalEmotions = {
+  en: [
+    { key: 'anxious', label: 'Anxious' },
+    { key: 'overwhelmed', label: 'Overwhelmed' },
+    { key: 'restless', label: 'Restless' },
+    { key: 'fearful', label: 'Fearful' },
+    { key: 'sad', label: 'Sad' },
+    { key: 'irritable', label: 'Irritable' },
+    { key: 'racing-thoughts', label: 'Racing thoughts' },
+    { key: 'tired', label: 'Tired' },
+  ],
+  ar: [
+    { key: 'anxious', label: 'قلق' },
+    { key: 'overwhelmed', label: 'مرهق نفسيًا' },
+    { key: 'restless', label: 'متوتر' },
+    { key: 'fearful', label: 'خائف' },
+    { key: 'sad', label: 'حزين' },
+    { key: 'irritable', label: 'سريع الانفعال' },
+    { key: 'racing-thoughts', label: 'أفكار متسارعة' },
+    { key: 'tired', label: 'متعب' },
+  ],
+}
+
+// The redesigned journal: 3 steps instead of 7 fields, shown one at a time.
+export const journalSteps = {
+  en: [
+    {
+      key: 'trigger',
+      title: 'What is making you feel anxious right now?',
+      placeholder: 'What happened, or what are you worried about?',
+    },
+    {
+      key: 'reframe',
+      title: 'Is there another way to look at this, or evidence against it?',
+      placeholder: 'A different angle, or something that challenges the thought...',
+    },
+    {
+      key: 'action',
+      title: 'What is one small thing you can control right now?',
+      placeholder: 'A small, doable next step...',
+    },
+  ],
+  ar: [
+    {
+      key: 'trigger',
+      title: 'ما الذي يجعلك تشعر بالقلق الآن؟',
+      placeholder: 'ماذا حدث، أو ما الذي يقلقك؟',
+    },
+    {
+      key: 'reframe',
+      title: 'هل هناك طريقة أخرى للنظر إلى هذا، أو دليل يعارضه؟',
+      placeholder: 'زاوية مختلفة، أو شيء يتحدى هذه الفكرة...',
+    },
+    {
+      key: 'action',
+      title: 'ما الشيء الصغير الذي يمكنك التحكم به الآن؟',
+      placeholder: 'خطوة صغيرة وقابلة للتنفيذ...',
+    },
+  ],
+}
+
+export const moodOptions = {
+  en: [
+    { key: 'good', emoji: '😊', label: 'Good' },
+    { key: 'okay', emoji: '🙂', label: 'Okay' },
+    { key: 'neutral', emoji: '😐', label: 'Neutral' },
+    { key: 'anxious', emoji: '😟', label: 'Anxious' },
+    { key: 'low', emoji: '😔', label: 'Low' },
+  ],
+  ar: [
+    { key: 'good', emoji: '😊', label: 'جيد' },
+    { key: 'okay', emoji: '🙂', label: 'مقبول' },
+    { key: 'neutral', emoji: '😐', label: 'محايد' },
+    { key: 'anxious', emoji: '😟', label: 'قلق' },
+    { key: 'low', emoji: '😔', label: 'منخفض' },
+  ],
+}

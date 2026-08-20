@@ -2,6 +2,8 @@ import SectionHeading from '../components/SectionHeading'
 import ToolCard from '../components/ToolCard'
 import BreathingExercise from '../tools/BreathingExercise'
 import RelaxationTimer from '../tools/RelaxationTimer'
+import MoodTracker from '../tools/MoodTracker'
+import AnxietyJournal from '../tools/AnxietyJournal'
 import CalmAudioPlayer from '../tools/CalmAudioPlayer'
 import { useLanguage } from '../i18n/LanguageContext'
 
@@ -9,20 +11,24 @@ const copy = {
   en: {
     eyebrow: 'Mental Wellness Tools',
     title: 'A few gentle tools, whenever you need them',
-    description: 'Simple tools you can use in the moment, right in your browser.',
+    description: 'Simple, private tools you can use in the moment. Everything you enter stays in your browser — nothing is sent anywhere.',
     cards: [
       { title: 'Breathing Exercise', description: 'A slow, guided breathing rhythm to help you find a moment of steadiness.', icon: '🫧' },
       { title: 'Relaxation Timer', description: 'A quiet, distraction-free space to rest and let your body settle.', icon: '⏳' },
+      { title: 'Mood Tracker', description: 'Notice patterns in how you feel over time.', icon: '📊' },
+      { title: 'Anxiety Journal', description: 'A short, structured space to work through a worry.', icon: '📓' },
       { title: 'Calm Audio', description: 'Short relaxation and sleep sessions, plus calming background sounds.', icon: '🎧' },
     ],
   },
   ar: {
     eyebrow: 'أدوات العافية النفسية',
     title: 'بضع أدوات لطيفة، كلما احتجتها',
-    description: 'أدوات بسيطة يمكنك استخدامها في اللحظة، مباشرة من متصفحك.',
+    description: 'أدوات بسيطة وخاصة يمكنك استخدامها في اللحظة. كل ما تُدخله يبقى في متصفحك — لا يُرسل شيء إلى أي مكان.',
     cards: [
       { title: 'تمرين التنفس', description: 'إيقاع تنفس بطيء وموجَّه يساعدك على إيجاد لحظة من الثبات.', icon: '🫧' },
       { title: 'مؤقّت الاسترخاء', description: 'مساحة هادئة وخالية من التشتيت للراحة وترك جسدك يهدأ.', icon: '⏳' },
+      { title: 'متتبع المزاج', description: 'لاحظ الأنماط في مشاعرك مع مرور الوقت.', icon: '📊' },
+      { title: 'يوميات القلق', description: 'مساحة قصيرة ومنظمة لمعالجة أحد المخاوف.', icon: '📓' },
       { title: 'أصوات هادئة', description: 'جلسات استرخاء ونوم قصيرة، بالإضافة إلى أصوات خلفية مهدئة.', icon: '🎧' },
     ],
   },
@@ -46,7 +52,15 @@ export default function ToolsSection() {
             <RelaxationTimer />
           </ToolCard>
 
-          <ToolCard id="tool-calm-audio" title={t.cards[2].title} description={t.cards[2].description} icon={t.cards[2].icon}>
+          <ToolCard title={t.cards[2].title} description={t.cards[2].description} icon={t.cards[2].icon}>
+            <MoodTracker />
+          </ToolCard>
+
+          <ToolCard title={t.cards[3].title} description={t.cards[3].description} icon={t.cards[3].icon}>
+            <AnxietyJournal />
+          </ToolCard>
+
+          <ToolCard id="tool-calm-audio" title={t.cards[4].title} description={t.cards[4].description} icon={t.cards[4].icon}>
             <CalmAudioPlayer />
           </ToolCard>
         </div>
