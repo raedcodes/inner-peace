@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://inner-peace.netlify.app/sitemap.xml

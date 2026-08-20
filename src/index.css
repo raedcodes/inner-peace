@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+
+  --color-cream: #faf7f2;
+  --color-cream-dark: #f2ede3;
+  --color-ink: #33302b;
+  --color-ink-soft: #5c574e;
+  --color-sage: #7a9b76;
+  --color-sage-light: #e4ebe1;
+  --color-sage-dark: #587055;
+  --color-dusk: #7b93a8;
+  --color-dusk-light: #e6edf2;
+  --color-dusk-dark: #4f6b80;
+  --color-sand: #e8ddc9;
+  --color-clay: #c98a6b;
+
+  --shadow-soft: 0 2px 8px rgba(51, 48, 43, 0.06), 0 8px 24px rgba(51, 48, 43, 0.05);
+  --shadow-soft-lg: 0 4px 16px rgba(51, 48, 43, 0.08), 0 16px 40px rgba(51, 48, 43, 0.07);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-dusk-dark);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
