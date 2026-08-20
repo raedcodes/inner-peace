@@ -40,7 +40,7 @@ export default function Lifestyle() {
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {topics.map((topic) => (
-          <InformationCard key={topic.id} title={topic.title} icon={icons[topic.id]}>
+          <InformationCard key={topic.id} id={`lifestyle-${topic.id}`} title={topic.title} icon={icons[topic.id]}>
             <p className="mb-3">{topic.summary}</p>
             <ul className="space-y-1.5">
               {topic.points.map((point) => (

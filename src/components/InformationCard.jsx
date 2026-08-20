@@ -1,6 +1,6 @@
-export default function InformationCard({ title, children, icon }) {
+export default function InformationCard({ title, children, icon, id }) {
   return (
-    <div className="rounded-2xl bg-white/70 border border-ink/5 shadow-soft p-6 md:p-7">
+    <div id={id} className="rounded-2xl bg-white/70 border border-ink/5 shadow-soft p-6 md:p-7 scroll-mt-24">
       {icon && (
         <div className="w-11 h-11 rounded-xl bg-sage-light flex items-center justify-center text-xl mb-4" aria-hidden="true">
           {icon}

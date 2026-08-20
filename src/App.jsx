@@ -2,6 +2,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Disclaimer from './components/Disclaimer'
 import Hero from './sections/Hero'
+import SituationPicker from './sections/SituationPicker'
 import UnderstandingAnxiety from './sections/UnderstandingAnxiety'
 import Symptoms from './sections/Symptoms'
 import Psychosomatic from './sections/Psychosomatic'
@@ -36,6 +37,7 @@ function App() {
 
       <main className="flex-1">
         <Hero />
+        <SituationPicker />
         <UnderstandingAnxiety />
         <Symptoms />
         <Psychosomatic />

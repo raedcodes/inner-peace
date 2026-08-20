@@ -116,10 +116,16 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center gap-2 xl:hidden">
+          <a
+            href="#tools"
+            className="inline-flex items-center rounded-full bg-sage text-white px-4 py-2 text-sm font-medium hover:bg-sage-dark transition-colors shadow-soft whitespace-nowrap"
+          >
+            {t.cta}
+          </a>
           <LanguageSwitch lang={lang} setLang={setLang} />
           <button
             type="button"
-            className="w-10 h-10 flex items-center justify-center rounded-full text-ink"
+            className="w-10 h-10 shrink-0 flex items-center justify-center rounded-full text-ink"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             aria-label={menuOpen ? t.closeMenu : t.openMenu}
@@ -150,15 +156,6 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <div className="px-6">
-            <a
-              href="#tools"
-              onClick={closeMenu}
-              className="block text-center rounded-full bg-sage text-white px-5 py-3 text-base font-medium"
-            >
-              {t.cta}
-            </a>
-          </div>
         </div>
       )}
     </header>

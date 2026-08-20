@@ -38,15 +38,15 @@ export default function ToolsSection() {
         <SectionHeading eyebrow={t.eyebrow} title={t.title} description={t.description} />
 
         <div className="grid lg:grid-cols-2 gap-6">
-          <ToolCard title={t.cards[0].title} description={t.cards[0].description} icon={t.cards[0].icon}>
+          <ToolCard id="tool-breathing" title={t.cards[0].title} description={t.cards[0].description} icon={t.cards[0].icon}>
             <BreathingExercise />
           </ToolCard>
 
-          <ToolCard title={t.cards[1].title} description={t.cards[1].description} icon={t.cards[1].icon}>
+          <ToolCard id="tool-relaxation-timer" title={t.cards[1].title} description={t.cards[1].description} icon={t.cards[1].icon}>
             <RelaxationTimer />
           </ToolCard>
 
-          <ToolCard title={t.cards[2].title} description={t.cards[2].description} icon={t.cards[2].icon}>
+          <ToolCard id="tool-calm-audio" title={t.cards[2].title} description={t.cards[2].description} icon={t.cards[2].icon}>
             <CalmAudioPlayer />
           </ToolCard>
         </div>
