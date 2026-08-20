@@ -4,11 +4,10 @@
 
 export const quotes = [
   {
-    type: 'quote',
+    type: 'insight',
     text: 'Accept imperfections in life, and you will change.',
-    author: 'Carl Rogers',
     author: 'Expert insight',
-    role: 'A recurring theme in resilience and self-compassion focused therapy',
+    role: 'Inspired by psychologist Carl Rogers’ ideas on self-acceptance',
     theme: 'Accepting imperfection',
   },
   {
@@ -22,28 +21,28 @@ export const quotes = [
     type: 'insight',
     text: 'Gently face your fears.',
     author: 'Expert insight',
-    role: 'Paraphrased from exposure therapy and self-compassion research',
-    theme: 'Face fears gently, with kindness',
+    role: 'Paraphrased from exposure therapy principles',
+    theme: 'Facing fears gently',
   },
   {
     type: 'insight',
-    text: 'Staying kind to yourself and to others.',  
+    text: 'Staying kind to yourself and to others.',
     author: 'Expert insight',
-    role: 'Paraphrased from exposure therapy and self-compassion research',
-    theme: 'Face fears gently, with kindness',
+    role: 'Paraphrased from self-compassion research',
+    theme: 'Kindness toward yourself and others',
   },
   {
     type: 'insight',
-    text: 'Always set boundaries and make yourself a priority.',  
+    text: 'Always set boundaries and make yourself a priority.',
     author: 'Expert insight',
-    role: 'Paraphrased from exposure therapy and self-compassion research',
-    theme: 'Face fears gently, with kindness',
+    role: 'Paraphrased from guidance on healthy boundaries and self-care',
+    theme: 'Boundaries and self-priority',
   },
   {
     type: 'insight',
-    text: 'What if? What do they think? It doesn’t matter. Stay present, take it step by step, and let go.',   
+    text: 'What if? What do they think? It doesn’t matter. Stay present, take it step by step, and let go.',
     author: 'Expert insight',
-    role: 'Paraphrased from exposure therapy and self-compassion research',
-    theme: 'Face fears gently, with kindness',
+    role: 'Paraphrased from mindfulness and acceptance-based approaches (e.g., ACT)',
+    theme: 'Staying present and letting go',
   },
 ]
