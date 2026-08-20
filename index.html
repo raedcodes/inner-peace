@@ -36,7 +36,7 @@
       so this hidden duplicate must exist with the same name and field names.
       The real, interactive form (Contact.jsx) submits to this via fetch.
     -->
-    <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+    <form name="contact" data-netlify="true" data-netlify-honeypot="bot-field" data-netlify-recaptcha="true" hidden>
       <input type="text" name="name" />
       <input type="email" name="email" />
       <textarea name="message"></textarea>
