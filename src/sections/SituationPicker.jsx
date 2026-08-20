@@ -88,22 +88,25 @@ export default function SituationPicker() {
       </div>
 
       {isCustom && (
-        <form onSubmit={submitCustom} className="max-w-xl mx-auto mb-8 flex flex-col sm:flex-row gap-3">
-          <textarea
-            value={customText}
-            onChange={(e) => setCustomText(e.target.value)}
-            rows={2}
-            placeholder={t.describePlaceholder}
-            className="flex-1 rounded-xl border border-ink/10 bg-white/80 px-4 py-2.5 text-sm text-ink placeholder:text-ink-soft/40 focus:border-sage focus:outline-none"
-          />
-          <button
-            type="submit"
-            disabled={!customText.trim() || status === 'loading'}
-            className="rounded-full bg-sage text-white px-5 py-2.5 text-sm font-medium disabled:opacity-40 hover:bg-sage-dark transition-colors whitespace-nowrap"
-          >
-            {status === 'loading' ? t.describeSending : t.describeSend}
-          </button>
-        </form>
+        <div className="max-w-xl mx-auto -mt-1 mb-8 rounded-2xl bg-white/70 border border-sage/30 shadow-soft p-4">
+          <form onSubmit={submitCustom} className="flex flex-col sm:flex-row gap-3">
+            <textarea
+              value={customText}
+              onChange={(e) => setCustomText(e.target.value)}
+              rows={2}
+              placeholder={t.describePlaceholder}
+              autoFocus
+              className="flex-1 rounded-xl border border-ink/10 bg-white/80 px-4 py-2.5 text-sm text-ink placeholder:text-ink-soft/40 focus:border-sage focus:outline-none resize-none"
+            />
+            <button
+              type="submit"
+              disabled={!customText.trim() || status === 'loading'}
+              className="rounded-full bg-sage text-white px-5 py-2.5 text-sm font-medium disabled:opacity-40 hover:bg-sage-dark transition-colors whitespace-nowrap"
+            >
+              {status === 'loading' ? t.describeSending : t.describeSend}
+            </button>
+          </form>
+        </div>
       )}
 
       {status !== 'idle' && (
