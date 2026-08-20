@@ -20,7 +20,6 @@ const copy = {
       "Sending goes straight to us and is not stored on this website. If you're in crisis or in immediate danger, please contact local emergency services instead of using this form.",
     success: 'Thank you — your message has been sent.',
     error: "Something went wrong sending your message. Please try again in a moment.",
-    captchaRequired: 'Please confirm the checkbox above before sending.',
   },
   ar: {
     eyebrow: 'تواصل معنا',
@@ -39,7 +38,6 @@ const copy = {
       'تصل الرسالة إلينا مباشرة ولا تُخزَّن على هذا الموقع. إذا كنت تمر بأزمة أو خطر مباشر، يُرجى التواصل مع خدمات الطوارئ المحلية بدلًا من استخدام هذا النموذج.',
     success: 'شكرًا لك — تم إرسال رسالتك.',
     error: 'حدث خطأ أثناء إرسال رسالتك. يُرجى المحاولة مرة أخرى بعد قليل.',
-    captchaRequired: 'يُرجى تأكيد المربع أعلاه قبل الإرسال.',
   },
 }
 
@@ -66,15 +64,6 @@ export default function Contact() {
 
     if (botField) return // honeypot triggered — silently drop
 
-    // Netlify's recaptcha widget (loaded only when served by Netlify) stores
-    // its token on window.grecaptcha — read it manually since this form
-    // submits via fetch rather than a native HTML POST.
-    const captchaToken = window.grecaptcha?.getResponse?.() || ''
-    if (window.grecaptcha && !captchaToken) {
-      setStatus('captcha-required')
-      return
-    }
-
     setStatus('sending')
     try {
       const response = await fetch('/', {
@@ -86,7 +75,6 @@ export default function Contact() {
           email: email.trim(),
           message: message.trim(),
           'bot-field': botField,
-          'g-recaptcha-response': captchaToken,
         }),
       })
 
@@ -163,8 +151,6 @@ export default function Contact() {
               />
             </div>
 
-            <div data-netlify-recaptcha="true" />
-
             <button
               type="submit"
               disabled={!canSend}
@@ -174,7 +160,6 @@ export default function Contact() {
             </button>
 
             {status === 'error' && <p className="text-xs text-clay">{t.error}</p>}
-            {status === 'captcha-required' && <p className="text-xs text-clay">{t.captchaRequired}</p>}
 
             <p className="text-xs text-ink-soft/70 leading-relaxed pt-1">{t.footnote}</p>
           </form>
