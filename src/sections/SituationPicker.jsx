@@ -6,6 +6,8 @@ import { categories, situations } from '../data/situations'
 import { useSituationSupport } from '../hooks/useSituationSupport'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import { useLanguage } from '../i18n/LanguageContext'
+import Button from '../components/Button'
+import Panel from '../components/Panel'
 
 const PATTERN_WINDOW_DAYS = 7
 const PATTERN_THRESHOLD = 3
@@ -113,7 +115,10 @@ export default function SituationPicker() {
     <section id="right-now" className="max-w-6xl mx-auto px-5 md:px-8 py-16 md:py-24 scroll-mt-20">
       <SectionHeading eyebrow={t.eyebrow} title={t.title} description={t.description} />
 
-      <div className="flex flex-wrap justify-center gap-2 mb-6" role="tablist">
+      <div
+        className="flex overflow-x-auto snap-x snap-mandatory gap-2 pb-1 -mx-5 px-5 sm:mx-0 sm:px-0 sm:flex-wrap sm:justify-center sm:overflow-visible mb-6"
+        role="tablist"
+      >
         {categoryList.map((category) => (
           <button
             key={category.id}
@@ -121,7 +126,7 @@ export default function SituationPicker() {
             role="tab"
             aria-selected={activeCategory === category.id}
             onClick={() => setActiveCategory(category.id)}
-            className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap ${
+            className={`shrink-0 snap-start sm:shrink inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap ${
               activeCategory === category.id
                 ? 'bg-sage text-white shadow-soft'
                 : 'bg-white/70 text-ink-soft border border-ink/5 hover:bg-white hover:text-ink'
@@ -155,7 +160,7 @@ export default function SituationPicker() {
       </div>
 
       {isCustom && (
-        <div className="max-w-xl mx-auto -mt-1 mb-8 rounded-2xl bg-white/70 border border-sage/30 shadow-soft p-4">
+        <Panel bg={70} border="border-sage/30" shadow className="max-w-xl mx-auto -mt-1 mb-8 p-4">
           <form onSubmit={submitCustom} className="flex flex-col sm:flex-row gap-3">
             <textarea
               value={customText}
@@ -163,17 +168,17 @@ export default function SituationPicker() {
               rows={2}
               placeholder={t.describePlaceholder}
               autoFocus
-              className="flex-1 rounded-xl border border-ink/10 bg-white/80 px-4 py-2.5 text-sm text-ink placeholder:text-ink-soft/40 focus:border-sage focus:outline-none resize-none"
+              className="flex-1 rounded-xl border border-ink/10 bg-white/80 px-4 py-2.5 text-sm text-ink placeholder:text-ink-soft/40 focus:border-sage resize-none"
             />
-            <button
+            <Button
               type="submit"
               disabled={!customText.trim() || status === 'loading'}
-              className="rounded-full bg-sage text-white px-5 py-2.5 text-sm font-medium disabled:opacity-40 hover:bg-sage-dark transition-colors whitespace-nowrap"
+              className="px-5 py-2.5 text-sm whitespace-nowrap"
             >
               {status === 'loading' ? t.describeSending : t.describeSend}
-            </button>
+            </Button>
           </form>
-        </div>
+        </Panel>
       )}
 
       {status !== 'idle' && (

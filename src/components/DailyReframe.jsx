@@ -26,7 +26,7 @@ export default function DailyReframe() {
   const message = todaysReframe(lang)
 
   return (
-    <div className="max-w-6xl mx-auto px-5 md:px-8 -mt-6 md:-mt-8 mb-16 md:mb-20">
+    <div className="max-w-6xl mx-auto px-5 md:px-8 -mt-6 md:-mt-8 mb-2 md:mb-4">
       <button
         type="button"
         onClick={() => setFlipped((v) => !v)}

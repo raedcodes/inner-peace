@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
+import Button from './Button'
 
 const copy = {
   en: {
@@ -181,21 +182,18 @@ export default function Navbar() {
 
         <div className="hidden lg:flex items-center gap-5 shrink-0">
           <LanguageSwitch lang={lang} setLang={setLang} />
-          <a
-            href="#tools"
-            className="inline-flex items-center rounded-full bg-sage text-white px-4 py-2.5 text-sm font-medium hover:bg-sage-dark transition-colors shadow-soft whitespace-nowrap"
-          >
+          <Button href="#right-now" className="px-4 py-2.5 text-sm shadow-soft whitespace-nowrap">
             {t.cta}
-          </a>
+          </Button>
         </div>
 
         <div className="flex items-center gap-1.5 min-[380px]:gap-2 lg:hidden">
-          <a
-            href="#tools"
-            className="inline-flex items-center rounded-full bg-sage text-white px-3 py-1.5 min-[380px]:px-4 min-[380px]:py-2 text-xs min-[380px]:text-sm font-medium hover:bg-sage-dark transition-colors shadow-soft whitespace-nowrap"
+          <Button
+            href="#right-now"
+            className="px-3 py-1.5 min-[380px]:px-4 min-[380px]:py-2 text-xs min-[380px]:text-sm shadow-soft whitespace-nowrap"
           >
             {t.cta}
-          </a>
+          </Button>
           <LanguageSwitch lang={lang} setLang={setLang} />
           <button
             type="button"

@@ -1,5 +1,6 @@
 import SectionHeading from '../components/SectionHeading'
 import InformationCard from '../components/InformationCard'
+import Panel from '../components/Panel'
 import { cyberchondriaNote, psychosomaticCards, psychosomaticReassurance } from '../data/psychosomatic'
 import { useLanguage } from '../i18n/LanguageContext'
 
@@ -36,17 +37,17 @@ export default function Psychosomatic() {
         ))}
       </div>
 
-      <div className="flex items-start gap-3 bg-white/60 border border-ink/5 rounded-2xl px-5 py-4 mb-8">
+      <Panel className="flex items-start gap-3 px-5 py-4 mb-8">
         <span className="text-xl shrink-0" aria-hidden="true">{note.icon}</span>
         <div>
           <p className="text-sm font-medium text-ink mb-1">{note.title}</p>
           <p className="text-sm text-ink-soft leading-relaxed">{note.body}</p>
         </div>
-      </div>
+      </Panel>
 
-      <p className="text-sm text-ink-soft leading-relaxed max-w-2xl bg-white/60 border border-ink/5 rounded-2xl px-5 py-4">
+      <Panel as="p" className="text-sm text-ink-soft leading-relaxed max-w-2xl px-5 py-4">
         {psychosomaticReassurance[lang]}
-      </p>
+      </Panel>
     </section>
   )
 }

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import { useLanguage } from '../i18n/LanguageContext'
 import { START_TOOL_EVENT } from '../lib/startTool'
+import Button from '../components/Button'
 
 const PHASES = {
   en: [
@@ -112,14 +113,9 @@ export default function BreathingExercise() {
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={toggle}
-        className="rounded-full bg-dusk-dark text-white px-6 py-2.5 text-sm font-medium hover:bg-dusk-dark/90 transition-colors"
-        aria-live="polite"
-      >
+      <Button variant="dusk" onClick={toggle} className="px-6 py-2.5 text-sm" aria-live="polite">
         {running ? t.stop : t.start}
-      </button>
+      </Button>
 
       <p className="text-xs text-ink-soft/80 mt-4 max-w-xs leading-relaxed">{t.note}</p>
     </div>

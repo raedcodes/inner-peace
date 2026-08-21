@@ -1,4 +1,5 @@
 import SectionHeading from '../components/SectionHeading'
+import Panel from '../components/Panel'
 import { medicationPoints } from '../data/help'
 import { useLanguage } from '../i18n/LanguageContext'
 
@@ -24,7 +25,7 @@ export default function Medication() {
     <section id="medication" className="max-w-6xl mx-auto px-5 md:px-8 py-16 md:py-24 scroll-mt-20">
       <SectionHeading eyebrow={t.eyebrow} title={t.title} description={t.description} />
 
-      <div className="rounded-2xl bg-white/60 border border-ink/5 shadow-soft p-6 md:p-8 max-w-3xl">
+      <Panel shadow className="p-6 md:p-8 max-w-3xl">
         <ul className="space-y-3">
           {points.map((point) => (
             <li key={point} className="flex gap-3 text-sm text-ink-soft leading-relaxed">
@@ -33,7 +34,7 @@ export default function Medication() {
             </li>
           ))}
         </ul>
-      </div>
+      </Panel>
     </section>
   )
 }

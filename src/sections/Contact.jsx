@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import SectionHeading from '../components/SectionHeading'
 import { useLanguage } from '../i18n/LanguageContext'
+import Button from '../components/Button'
+import Panel from '../components/Panel'
 
 const copy = {
   en: {
@@ -95,14 +97,17 @@ export default function Contact() {
         <SectionHeading eyebrow={t.eyebrow} title={t.title} description={t.description} />
 
         {status === 'success' ? (
-          <div className="rounded-2xl bg-white/70 border border-ink/5 shadow-soft p-6 md:p-8 text-center text-ink">
-            {t.success}
-          </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="rounded-2xl bg-white/70 border border-ink/5 shadow-soft p-6 md:p-8 space-y-4"
+          <Panel
+            bg={70}
+            shadow
+            className="p-6 md:p-8 text-center text-ink"
+            role="status"
+            aria-live="polite"
           >
+            {t.success}
+          </Panel>
+        ) : (
+          <Panel as="form" bg={70} shadow onSubmit={handleSubmit} className="p-6 md:p-8 space-y-4">
             <p className="hidden" aria-hidden="true">
               <label>
                 Don’t fill this out if you’re human: <input tabIndex={-1} autoComplete="off" value={botField} onChange={(e) => setBotField(e.target.value)} />
@@ -118,7 +123,7 @@ export default function Contact() {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full rounded-xl border border-ink/10 bg-white/80 px-4 py-2.5 text-sm text-ink focus:border-dusk focus:outline-none"
+                className="w-full rounded-xl border border-ink/10 bg-white/80 px-4 py-2.5 text-sm text-ink focus:border-dusk"
               />
             </div>
 
@@ -131,7 +136,7 @@ export default function Contact() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-xl border border-ink/10 bg-white/80 px-4 py-2.5 text-sm text-ink focus:border-dusk focus:outline-none"
+                className="w-full rounded-xl border border-ink/10 bg-white/80 px-4 py-2.5 text-sm text-ink focus:border-dusk"
               />
             </div>
 
@@ -147,22 +152,22 @@ export default function Contact() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder={t.messagePlaceholder}
-                className="w-full rounded-xl border border-ink/10 bg-white/80 px-4 py-3 text-sm text-ink placeholder:text-ink-soft/40 focus:border-dusk focus:outline-none"
+                className="w-full rounded-xl border border-ink/10 bg-white/80 px-4 py-3 text-sm text-ink placeholder:text-ink-soft/40 focus:border-dusk"
               />
             </div>
 
-            <button
-              type="submit"
-              disabled={!canSend}
-              className="rounded-full bg-dusk-dark text-white px-6 py-2.5 text-sm font-medium disabled:opacity-40 hover:bg-dusk-dark/90 transition-colors"
-            >
+            <Button type="submit" variant="dusk" disabled={!canSend} className="px-6 py-2.5 text-sm">
               {status === 'sending' ? t.sending : t.send}
-            </button>
+            </Button>
 
-            {status === 'error' && <p className="text-xs text-clay">{t.error}</p>}
+            {status === 'error' && (
+              <p className="text-xs text-clay" role="alert">
+                {t.error}
+              </p>
+            )}
 
             <p className="text-xs text-ink-soft/70 leading-relaxed pt-1">{t.footnote}</p>
-          </form>
+          </Panel>
         )}
       </div>
     </section>

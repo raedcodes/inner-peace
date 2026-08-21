@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { useReducedMotion } from '../hooks/useReducedMotion'
+import Button from '../components/Button'
 
 const copy = {
   en: {
@@ -131,7 +132,7 @@ export default function ThoughtDissolver() {
           onChange={(e) => setText(e.target.value)}
           placeholder={t.placeholder}
           disabled={dissolving}
-          className={`w-full rounded-xl border border-ink/10 bg-white/70 px-4 py-2.5 text-sm text-ink placeholder:text-ink-soft/40 focus:border-sage focus:outline-none resize-none transition-opacity ${
+          className={`w-full rounded-xl border border-ink/10 bg-white/70 px-4 py-2.5 text-sm text-ink placeholder:text-ink-soft/40 focus:border-sage resize-none transition-opacity ${
             dissolving ? 'opacity-0' : 'opacity-100'
           }`}
         />
@@ -141,14 +142,9 @@ export default function ThoughtDissolver() {
         />
       </div>
 
-      <button
-        type="button"
-        onClick={dissolve}
-        disabled={!text.trim() || dissolving}
-        className="mt-3 rounded-full bg-sage text-white px-5 py-2 text-sm font-medium disabled:opacity-40 hover:bg-sage-dark transition-colors"
-      >
+      <Button onClick={dissolve} disabled={!text.trim() || dissolving} className="mt-3 px-5 py-2 text-sm">
         {t.dissolve}
-      </button>
+      </Button>
 
       <p className="text-xs text-ink-soft/70 mt-3">{t.privacy}</p>
     </div>

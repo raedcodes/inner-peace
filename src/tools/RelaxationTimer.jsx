@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import { useLanguage } from '../i18n/LanguageContext'
 import { START_TOOL_EVENT } from '../lib/startTool'
+import Button from '../components/Button'
 
 const DURATIONS = {
   en: [
@@ -140,13 +141,9 @@ export default function RelaxationTimer() {
       <p className="text-sm text-ink-soft max-w-xs mx-auto mb-5 leading-relaxed">{t.instructions}</p>
 
       <div className="flex flex-col items-center gap-3">
-        <button
-          type="button"
-          onClick={toggle}
-          className="rounded-full bg-dusk-dark text-white px-6 py-2.5 text-sm font-medium hover:bg-dusk-dark/90 transition-colors"
-        >
+        <Button variant="dusk" onClick={toggle} className="px-6 py-2.5 text-sm" aria-live="polite">
           {running ? t.pause : secondsLeft === 0 ? t.restart : t.start}
-        </button>
+        </Button>
 
         <label className="flex items-center gap-2 text-xs text-ink-soft">
           <input

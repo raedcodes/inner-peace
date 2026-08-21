@@ -1,4 +1,5 @@
 import HeroIllustration from '../components/HeroIllustration'
+import Button from '../components/Button'
 import { useLanguage } from '../i18n/LanguageContext'
 
 const copy = {
@@ -56,18 +57,12 @@ export default function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-          <a
-            href="#right-now"
-            className="w-full sm:w-auto rounded-full bg-ink text-cream px-7 py-3 text-sm font-medium hover:bg-ink/90 transition-colors shadow-soft"
-          >
+          <Button href="#right-now" variant="ink" className="w-full sm:w-auto px-7 py-3 text-sm shadow-soft">
             {t.ctaPrimary}
-          </a>
-          <a
-            href="#tools"
-            className="w-full sm:w-auto rounded-full border border-ink/20 text-ink px-7 py-3 text-sm font-medium hover:bg-white/60 transition-colors"
-          >
+          </Button>
+          <Button href="#tools" variant="outline" className="w-full sm:w-auto px-7 py-3 text-sm">
             {t.ctaSecondary}
-          </a>
+          </Button>
         </div>
 
         <div className="max-w-3xl mx-auto mb-10 rounded-[28px] overflow-hidden shadow-soft-lg">

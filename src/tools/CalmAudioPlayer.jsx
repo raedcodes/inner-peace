@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
 import { START_TOOL_EVENT } from '../lib/startTool'
+import Panel from '../components/Panel'
 
 const sessions = {
   en: [
@@ -80,7 +81,7 @@ function AudioTrack({ title, file, playingId, onPlay, autoStartKey }) {
 
   if (missing) {
     return (
-      <div className="rounded-xl bg-white/60 border border-ink/5 px-4 py-3.5">
+      <Panel radius="xl" className="px-4 py-3.5">
         <p className="text-sm font-medium text-ink mb-2">{title}</p>
         <p className="text-xs text-ink-soft/70 italic">
           {t.missing}{' '}
@@ -89,12 +90,12 @@ function AudioTrack({ title, file, playingId, onPlay, autoStartKey }) {
           </code>
           .
         </p>
-      </div>
+      </Panel>
     )
   }
 
   return (
-    <div className="rounded-xl bg-white/60 border border-ink/5 px-4 py-3.5">
+    <Panel radius="xl" className="px-4 py-3.5">
       <p className="text-sm font-medium text-ink mb-3">{title}</p>
       <div className="flex items-center gap-3">
         <button
@@ -142,7 +143,7 @@ function AudioTrack({ title, file, playingId, onPlay, autoStartKey }) {
       >
         <source src={file} type="audio/mpeg" />
       </audio>
-    </div>
+    </Panel>
   )
 }
 

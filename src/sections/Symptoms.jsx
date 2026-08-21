@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import SectionHeading from '../components/SectionHeading'
 import SymptomCard from '../components/SymptomCard'
+import Panel from '../components/Panel'
 import { symptomCategories, symptomsDisclaimer } from '../data/symptoms'
 import { useLanguage } from '../i18n/LanguageContext'
 
@@ -39,9 +40,9 @@ export default function Symptoms() {
           ))}
         </div>
 
-        <p className="text-sm text-ink-soft leading-relaxed max-w-2xl bg-white/60 border border-ink/5 rounded-2xl px-5 py-4">
+        <Panel as="p" className="text-sm text-ink-soft leading-relaxed max-w-2xl px-5 py-4">
           {symptomsDisclaimer[lang]}
-        </p>
+        </Panel>
       </div>
     </section>
   )

@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { startTool } from '../lib/startTool'
+import Button from './Button'
+import Panel from './Panel'
 
 const copy = {
   en: {
@@ -59,37 +61,30 @@ export default function RecommendationPanel({
 
   if (status === 'loading') {
     return (
-      <div
-        className="rounded-2xl bg-white/70 border border-ink/5 shadow-soft p-6 md:p-7 flex items-center justify-center gap-3"
-        aria-live="polite"
-      >
+      <Panel bg={70} shadow className="p-6 md:p-7 flex items-center justify-center gap-3" aria-live="polite">
         <span className="relative flex h-3 w-3" aria-hidden="true">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sage opacity-60" />
           <span className="relative inline-flex h-3 w-3 rounded-full bg-sage-dark" />
         </span>
         <p className="text-sm text-ink-soft">{t.loading}</p>
-      </div>
+      </Panel>
     )
   }
 
   if (status === 'error') {
     return (
-      <div className="rounded-2xl bg-white/70 border border-ink/5 shadow-soft p-6 md:p-7 text-center" role="alert">
+      <Panel bg={70} shadow className="p-6 md:p-7 text-center" role="alert">
         <p className="text-sm text-ink mb-4">{t.errorTitle} {error}</p>
-        <button
-          type="button"
-          onClick={onRetry}
-          className="rounded-full bg-dusk-dark text-white px-5 py-2 text-sm font-medium hover:bg-dusk-dark/90 transition-colors"
-        >
+        <Button variant="dusk" onClick={onRetry} className="px-5 py-2 text-sm">
           {t.retry}
-        </button>
-      </div>
+        </Button>
+      </Panel>
     )
   }
 
   if (status === 'success' && data) {
     return (
-      <div className="rounded-2xl bg-white/70 border border-ink/5 shadow-soft p-6 md:p-7" aria-live="polite">
+      <Panel bg={70} shadow className="p-6 md:p-7" aria-live="polite">
         {patternCount > 0 && patternTitle && (
           <div className="rounded-xl bg-clay/10 border border-clay/30 px-4 py-3 mb-4">
             <p className="text-sm text-ink leading-relaxed">{t.patternAlert(patternCount, patternTitle)}</p>
@@ -113,14 +108,13 @@ export default function RecommendationPanel({
             {resources
               .filter((r) => r.href.startsWith('#tool-'))
               .map((resource) => (
-                <button
+                <Button
                   key={resource.href}
-                  type="button"
                   onClick={() => startTool(resource.href)}
-                  className="block w-full sm:w-auto mb-2 rounded-full bg-sage text-white px-4 py-2 text-sm font-medium hover:bg-sage-dark transition-colors"
+                  className="block w-full sm:w-auto mb-2 px-4 py-2 text-sm"
                 >
                   {t.startNow(resource.label)}
-                </button>
+                </Button>
               ))}
 
             <p className="text-xs font-semibold uppercase tracking-wide text-sage-dark mb-2 mt-1">{t.resourcesTitle}</p>
@@ -128,13 +122,9 @@ export default function RecommendationPanel({
               {resources
                 .filter((r) => !r.href.startsWith('#tool-'))
                 .map((resource) => (
-                  <a
-                    key={resource.href}
-                    href={resource.href}
-                    className="text-sm rounded-full bg-sage-light text-sage-dark px-3.5 py-1.5 hover:bg-sage/20 transition-colors"
-                  >
+                  <Button key={resource.href} href={resource.href} variant="tag" className="text-sm px-3.5 py-1.5">
                     {resource.label}
-                  </a>
+                  </Button>
                 ))}
             </div>
           </div>
@@ -144,41 +134,26 @@ export default function RecommendationPanel({
           {feedback === null ? (
             <div className="flex items-center gap-3">
               <p className="text-sm text-ink-soft">{t.checkInPrompt}</p>
-              <button
-                type="button"
-                onClick={() => setFeedback('yes')}
-                className="text-sm rounded-full bg-sage-light text-sage-dark px-3.5 py-1.5 hover:bg-sage/20 transition-colors"
-              >
+              <Button variant="tag" onClick={() => setFeedback('yes')} className="text-sm px-3.5 py-1.5">
                 {t.yes}
-              </button>
-              <button
-                type="button"
-                onClick={() => setFeedback('no')}
-                className="text-sm rounded-full bg-ink/5 text-ink-soft px-3.5 py-1.5 hover:bg-ink/10 transition-colors"
-              >
+              </Button>
+              <Button variant="tag-neutral" onClick={() => setFeedback('no')} className="text-sm px-3.5 py-1.5">
                 {t.no}
-              </button>
+              </Button>
             </div>
           ) : (
             <div>
               <p className="text-sm text-ink-soft mb-3">{feedback === 'yes' ? t.yesResponse : t.noResponse}</p>
               <div className="flex flex-wrap gap-2">
                 {onPickAnother && (
-                  <button
-                    type="button"
-                    onClick={onPickAnother}
-                    className="text-sm rounded-full bg-sage-light text-sage-dark px-3.5 py-1.5 hover:bg-sage/20 transition-colors"
-                  >
+                  <Button variant="tag" onClick={onPickAnother} className="text-sm px-3.5 py-1.5">
                     {t.pickAnother}
-                  </button>
+                  </Button>
                 )}
                 {feedback === 'no' && (
-                  <a
-                    href="#therapy"
-                    className="text-sm rounded-full bg-ink/5 text-ink-soft px-3.5 py-1.5 hover:bg-ink/10 transition-colors"
-                  >
+                  <Button href="#therapy" variant="tag-neutral" className="text-sm px-3.5 py-1.5">
                     {t.seeTherapy}
-                  </a>
+                  </Button>
                 )}
               </div>
             </div>
@@ -186,7 +161,7 @@ export default function RecommendationPanel({
         </div>
 
         <p className="text-xs text-ink-soft/70 leading-relaxed pt-3 border-t border-ink/10">{t.disclaimer}</p>
-      </div>
+      </Panel>
     )
   }
 
