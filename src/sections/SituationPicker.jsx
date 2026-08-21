@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import SectionHeading from '../components/SectionHeading'
 import SituationCard from '../components/SituationCard'
 import RecommendationPanel from '../components/RecommendationPanel'
-import { situations } from '../data/situations'
+import { categories, situations } from '../data/situations'
 import { useSituationSupport } from '../hooks/useSituationSupport'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import { useLanguage } from '../i18n/LanguageContext'
@@ -44,12 +44,15 @@ export default function SituationPicker() {
   const { lang } = useLanguage()
   const t = copy[lang]
   const list = situations[lang]
+  const categoryList = categories[lang]
+  const [activeCategory, setActiveCategory] = useState(categoryList[0].id)
   const [selectedId, setSelectedId] = useState(null)
   const [customText, setCustomText] = useState('')
-  const { status, data, error, run, retry, reset } = useSituationSupport()
+  const { status, data, error, run, retry, resolveLocal, reset } = useSituationSupport()
   const [history, setHistory] = useLocalStorage('inner-peace:checkin-history', [])
   const panelRef = useRef(null)
   const loggedDataRef = useRef(null)
+  const visibleSituations = list.filter((s) => s.category === activeCategory)
 
   useEffect(() => {
     if (status !== 'idle') {
@@ -76,7 +79,10 @@ export default function SituationPicker() {
     setSelectedId(id)
     reset()
     if (id !== 'something-else') {
-      run({ situationId: id, lang })
+      const situation = list.find((s) => s.id === id)
+      if (situation) {
+        resolveLocal({ acknowledgment: situation.acknowledgment, suggestions: situation.suggestions })
+      }
     }
   }
 
@@ -107,22 +113,45 @@ export default function SituationPicker() {
     <section id="right-now" className="max-w-6xl mx-auto px-5 md:px-8 py-16 md:py-24 scroll-mt-20">
       <SectionHeading eyebrow={t.eyebrow} title={t.title} description={t.description} />
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 mb-8">
-        {list.map((situation) => (
-          <SituationCard
-            key={situation.id}
-            icon={situation.icon}
-            title={situation.title}
-            selected={selectedId === situation.id}
-            onSelect={() => selectCard(situation.id)}
-          />
+      <div className="flex flex-wrap justify-center gap-2 mb-6" role="tablist">
+        {categoryList.map((category) => (
+          <button
+            key={category.id}
+            type="button"
+            role="tab"
+            aria-selected={activeCategory === category.id}
+            onClick={() => setActiveCategory(category.id)}
+            className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap ${
+              activeCategory === category.id
+                ? 'bg-sage text-white shadow-soft'
+                : 'bg-white/70 text-ink-soft border border-ink/5 hover:bg-white hover:text-ink'
+            }`}
+          >
+            <span aria-hidden="true">{category.icon}</span>
+            {category.label}
+          </button>
         ))}
-        <SituationCard
-          icon="✍️"
-          title={t.somethingElse}
-          selected={isCustom}
-          onSelect={() => selectCard('something-else')}
-        />
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-8">
+        {activeCategory === 'other' ? (
+          <SituationCard
+            icon="✍️"
+            title={t.somethingElse}
+            selected={isCustom}
+            onSelect={() => selectCard('something-else')}
+          />
+        ) : (
+          visibleSituations.map((situation) => (
+            <SituationCard
+              key={situation.id}
+              icon={situation.icon}
+              title={situation.title}
+              selected={selectedId === situation.id}
+              onSelect={() => selectCard(situation.id)}
+            />
+          ))
+        )}
       </div>
 
       {isCustom && (

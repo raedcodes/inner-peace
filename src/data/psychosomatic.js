@@ -45,6 +45,19 @@ export const psychosomaticCards = {
   ],
 }
 
+export const cyberchondriaNote = {
+  en: {
+    icon: '🌐',
+    title: 'A Note on "Cyberchondria" (Online Health Searching)',
+    body: 'Googling physical symptoms often triggers a cycle where searching for reassurance actually increases anxiety. Search engines prioritize rare, severe conditions over common explanations like stress or muscle strain. If you catch yourself compulsively checking symptoms online, try closing your tabs and taking a 2-minute grounding break instead.',
+  },
+  ar: {
+    icon: '🌐',
+    title: 'ملاحظة حول "القلق السيبراني" (البحث الصحي عبر الإنترنت)',
+    body: 'البحث عن الأعراض الجسدية على جوجل غالبًا ما يُشعل حلقة تجعل البحث عن الطمأنينة يزيد القلق فعليًا بدلاً من تخفيفه. محركات البحث تُبرز الحالات النادرة والخطيرة أكثر من التفسيرات الشائعة مثل التوتر أو شد العضلات. إذا لاحظت نفسك تتحقق من الأعراض بشكل قهري عبر الإنترنت، جرّب إغلاق التبويبات وأخذ استراحة تأريض لدقيقتين بدلاً من ذلك.',
+  },
+}
+
 export const psychosomaticReassurance = {
   en: 'If you experience physical symptoms, having them medically evaluated is still a reasonable and often important step — especially if something is new, severe, or persistent. Understanding the mind-body connection is meant to add context, not to replace appropriate medical care.',
   ar: 'إذا كنت تعاني من أعراض جسدية، فإن إجراء تقييم طبي لها يبقى خطوة معقولة وغالبًا مهمة — خصوصًا إذا كان العرض جديدًا أو شديدًا أو مستمرًا. فهم رابط الجسد والعقل هو لإضافة سياق، وليس بديلاً عن الرعاية الطبية المناسبة.',

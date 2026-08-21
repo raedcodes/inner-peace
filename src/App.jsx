@@ -2,6 +2,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Disclaimer from './components/Disclaimer'
 import BackToTop from './components/BackToTop'
+import DailyReframe from './components/DailyReframe'
 import Hero from './sections/Hero'
 import SituationPicker from './sections/SituationPicker'
 import UnderstandingAnxiety from './sections/UnderstandingAnxiety'
@@ -38,6 +39,7 @@ function App() {
 
       <main className="flex-1">
         <Hero />
+        <DailyReframe />
         <SituationPicker />
         <UnderstandingAnxiety />
         <Symptoms />

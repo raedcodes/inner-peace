@@ -36,6 +36,13 @@ export function useSituationSupport() {
     if (lastRequest) run(lastRequest)
   }, [lastRequest, run])
 
+  const resolveLocal = useCallback((localData) => {
+    setError(null)
+    setLastRequest(null)
+    setData(localData)
+    setStatus('success')
+  }, [])
+
   const reset = useCallback(() => {
     setStatus('idle')
     setData(null)
@@ -43,5 +50,5 @@ export function useSituationSupport() {
     setLastRequest(null)
   }, [])
 
-  return { status, data, error, run, retry, reset }
+  return { status, data, error, run, retry, resolveLocal, reset }
 }

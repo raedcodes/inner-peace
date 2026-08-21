@@ -21,7 +21,7 @@ export default function Symptoms() {
   const { lang } = useLanguage()
   const t = copy[lang]
   const categories = symptomCategories[lang]
-  const [openId, setOpenId] = useState(categories[0].id)
+  const [openId, setOpenId] = useState(null)
 
   return (
     <section id="symptoms" className="bg-sage-light/40 scroll-mt-20">

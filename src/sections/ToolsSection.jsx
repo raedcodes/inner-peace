@@ -3,8 +3,9 @@ import ToolCard from '../components/ToolCard'
 import BreathingExercise from '../tools/BreathingExercise'
 import RelaxationTimer from '../tools/RelaxationTimer'
 import MoodTracker from '../tools/MoodTracker'
-import AnxietyJournal from '../tools/AnxietyJournal'
 import CalmAudioPlayer from '../tools/CalmAudioPlayer'
+import FidgetPad from '../tools/FidgetPad'
+import ThoughtDissolver from '../tools/ThoughtDissolver'
 import { useLanguage } from '../i18n/LanguageContext'
 
 const copy = {
@@ -16,8 +17,9 @@ const copy = {
       { title: 'Breathing Exercise', description: 'A slow, guided breathing rhythm to help you find a moment of steadiness.', icon: '🫧' },
       { title: 'Relaxation Timer', description: 'A quiet, distraction-free space to rest and let your body settle.', icon: '⏳' },
       { title: 'Mood Tracker', description: 'Notice patterns in how you feel over time.', icon: '📊' },
-      { title: 'Anxiety Journal', description: 'A short, structured space to work through a worry.', icon: '📓' },
       { title: 'Calm Audio', description: 'Short relaxation and sleep sessions, plus calming background sounds.', icon: '🎧' },
+      { title: 'Fidget Pad', description: 'A small, soothing distraction for restless hands or nervous energy.', icon: '🫧' },
+      { title: 'Thought Dissolver', description: 'Write down a worry, then watch it gently dissolve away.', icon: '💭' },
     ],
   },
   ar: {
@@ -28,8 +30,9 @@ const copy = {
       { title: 'تمرين التنفس', description: 'إيقاع تنفس بطيء وموجَّه يساعدك على إيجاد لحظة من الثبات.', icon: '🫧' },
       { title: 'مؤقّت الاسترخاء', description: 'مساحة هادئة وخالية من التشتيت للراحة وترك جسدك يهدأ.', icon: '⏳' },
       { title: 'متتبع المزاج', description: 'لاحظ الأنماط في مشاعرك مع مرور الوقت.', icon: '📊' },
-      { title: 'يوميات القلق', description: 'مساحة قصيرة ومنظمة لمعالجة أحد المخاوف.', icon: '📓' },
       { title: 'أصوات هادئة', description: 'جلسات استرخاء ونوم قصيرة، بالإضافة إلى أصوات خلفية مهدئة.', icon: '🎧' },
+      { title: 'لوحة التسلية', description: 'إلهاء صغير ومهدئ لليدين المتوترة أو الطاقة العصبية.', icon: '🫧' },
+      { title: 'مذيب الأفكار', description: 'اكتب قلقًا، ثم شاهده يذوب برفق.', icon: '💭' },
     ],
   },
 }
@@ -56,12 +59,16 @@ export default function ToolsSection() {
             <MoodTracker />
           </ToolCard>
 
-          <ToolCard title={t.cards[3].title} description={t.cards[3].description} icon={t.cards[3].icon}>
-            <AnxietyJournal />
+          <ToolCard id="tool-calm-audio" title={t.cards[3].title} description={t.cards[3].description} icon={t.cards[3].icon}>
+            <CalmAudioPlayer />
           </ToolCard>
 
-          <ToolCard id="tool-calm-audio" title={t.cards[4].title} description={t.cards[4].description} icon={t.cards[4].icon}>
-            <CalmAudioPlayer />
+          <ToolCard title={t.cards[4].title} description={t.cards[4].description} icon={t.cards[4].icon}>
+            <FidgetPad />
+          </ToolCard>
+
+          <ToolCard title={t.cards[5].title} description={t.cards[5].description} icon={t.cards[5].icon}>
+            <ThoughtDissolver />
           </ToolCard>
         </div>
       </div>

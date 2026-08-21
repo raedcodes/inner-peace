@@ -1,33 +1,37 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../i18n/LanguageContext'
 
 const copy = {
   en: {
-    links: [
+    aiGuide: { href: '#right-now', label: 'AI Guide' },
+    toolsLink: { href: '#tools', label: 'Tools' },
+    learnLabel: 'Learn',
+    learnLinks: [
       { href: '#understanding', label: 'Understanding Anxiety' },
       { href: '#symptoms', label: 'Symptoms' },
       { href: '#psychosomatic', label: 'Mind-Body' },
       { href: '#lifestyle', label: 'Lifestyle' },
       { href: '#therapy', label: 'Therapy' },
-      { href: '#tools', label: 'Tools' },
       { href: '#quotes', label: 'Insights' },
-      { href: '#contact', label: 'Contact' },
     ],
+    contactLink: { href: '#contact', label: 'Contact' },
     cta: 'Feel Better',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
   },
   ar: {
-    links: [
+    aiGuide: { href: '#right-now', label: 'الدليل الذكي' },
+    toolsLink: { href: '#tools', label: 'أدوات' },
+    learnLabel: 'تعلّم',
+    learnLinks: [
       { href: '#understanding', label: 'فهم القلق' },
       { href: '#symptoms', label: 'الأعراض' },
       { href: '#psychosomatic', label: 'الجسد والعقل' },
       { href: '#lifestyle', label: 'نمط الحياة' },
       { href: '#therapy', label: 'العلاج' },
-      { href: '#tools', label: 'أدوات' },
       { href: '#quotes', label: 'رؤى' },
-      { href: '#contact', label: 'تواصل' },
     ],
+    contactLink: { href: '#contact', label: 'تواصل' },
     cta: 'ابدأ التحسن',
     openMenu: 'فتح القائمة',
     closeMenu: 'إغلاق القائمة',
@@ -58,11 +62,71 @@ function LanguageSwitch({ lang, setLang, className = '' }) {
   )
 }
 
+function LearnDropdown({ label, links }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    if (!open) return
+    const onDocClick = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+    }
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('click', onDocClick)
+    document.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.removeEventListener('click', onDocClick)
+      document.removeEventListener('keydown', onKeyDown)
+    }
+  }, [open])
+
+  return (
+    <div
+      ref={ref}
+      className="relative shrink-0"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="true"
+        aria-expanded={open}
+        className="flex items-center gap-1 text-sm text-ink-soft hover:text-ink transition-colors whitespace-nowrap"
+      >
+        {label}
+        <span aria-hidden="true" className={`text-xs transition-transform ${open ? 'rotate-180' : ''}`}>▾</span>
+      </button>
+
+      {open && (
+        <div className="absolute top-full start-0 pt-3 z-40">
+          <ul className="min-w-48 rounded-xl bg-white border border-ink/5 shadow-soft-lg py-2">
+            {links.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="block px-4 py-2 text-sm text-ink-soft hover:text-ink hover:bg-sage-light/40 transition-colors"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function Navbar() {
   const { lang, setLang } = useLanguage()
   const t = copy[lang]
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [learnMobileOpen, setLearnMobileOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -94,17 +158,28 @@ export default function Navbar() {
           <span className="sr-only min-[380px]:hidden">Inner Peace</span>
         </a>
 
-        <ul className="hidden xl:flex items-center gap-6 xl:gap-8 min-w-0">
-          {t.links.map((link) => (
-            <li key={link.href} className="shrink-0">
-              <a href={link.href} className="text-sm text-ink-soft hover:text-ink transition-colors whitespace-nowrap">
-                {link.label}
-              </a>
-            </li>
-          ))}
+        <ul className="hidden lg:flex items-center gap-7 min-w-0">
+          <li className="shrink-0">
+            <a href={t.aiGuide.href} className="text-sm text-ink-soft hover:text-ink transition-colors whitespace-nowrap">
+              {t.aiGuide.label}
+            </a>
+          </li>
+          <li className="shrink-0">
+            <a href={t.toolsLink.href} className="text-sm text-ink-soft hover:text-ink transition-colors whitespace-nowrap">
+              {t.toolsLink.label}
+            </a>
+          </li>
+          <li>
+            <LearnDropdown label={t.learnLabel} links={t.learnLinks} />
+          </li>
+          <li className="shrink-0">
+            <a href={t.contactLink.href} className="text-sm text-ink-soft hover:text-ink transition-colors whitespace-nowrap">
+              {t.contactLink.label}
+            </a>
+          </li>
         </ul>
 
-        <div className="hidden xl:flex items-center gap-5 shrink-0">
+        <div className="hidden lg:flex items-center gap-5 shrink-0">
           <LanguageSwitch lang={lang} setLang={setLang} />
           <a
             href="#tools"
@@ -114,7 +189,7 @@ export default function Navbar() {
           </a>
         </div>
 
-        <div className="flex items-center gap-1.5 min-[380px]:gap-2 xl:hidden">
+        <div className="flex items-center gap-1.5 min-[380px]:gap-2 lg:hidden">
           <a
             href="#tools"
             className="inline-flex items-center rounded-full bg-sage text-white px-3 py-1.5 min-[380px]:px-4 min-[380px]:py-2 text-xs min-[380px]:text-sm font-medium hover:bg-sage-dark transition-colors shadow-soft whitespace-nowrap"
@@ -141,20 +216,50 @@ export default function Navbar() {
     {menuOpen && (
       <div
         id="mobile-menu"
-        className="xl:hidden fixed inset-x-0 top-16 bottom-0 bg-cream z-20 overflow-y-auto"
+        className="lg:hidden fixed inset-x-0 top-16 bottom-0 bg-cream z-20 overflow-y-auto"
       >
         <ul className="flex flex-col px-6 py-6 gap-1">
-          {t.links.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                onClick={closeMenu}
-                className="block py-3 text-lg text-ink border-b border-ink/5"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
+          <li>
+            <a href={t.aiGuide.href} onClick={closeMenu} className="block py-3 text-lg text-ink border-b border-ink/5">
+              {t.aiGuide.label}
+            </a>
+          </li>
+          <li>
+            <a href={t.toolsLink.href} onClick={closeMenu} className="block py-3 text-lg text-ink border-b border-ink/5">
+              {t.toolsLink.label}
+            </a>
+          </li>
+          <li>
+            <button
+              type="button"
+              onClick={() => setLearnMobileOpen((v) => !v)}
+              aria-expanded={learnMobileOpen}
+              className="w-full flex items-center justify-between py-3 text-lg text-ink border-b border-ink/5"
+            >
+              {t.learnLabel}
+              <span aria-hidden="true" className={`text-sm transition-transform ${learnMobileOpen ? 'rotate-180' : ''}`}>▾</span>
+            </button>
+            {learnMobileOpen && (
+              <ul className="ps-4 pb-2">
+                {t.learnLinks.map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      onClick={closeMenu}
+                      className="block py-2.5 text-base text-ink-soft"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+          <li>
+            <a href={t.contactLink.href} onClick={closeMenu} className="block py-3 text-lg text-ink border-b border-ink/5">
+              {t.contactLink.label}
+            </a>
+          </li>
         </ul>
       </div>
     )}

@@ -8,8 +8,8 @@ const copy = {
     slogan: 'Find your Calm.',
     description:
       'Inner Peace offers practical tools, clear information, and gentle guidance for people navigating anxiety, stress, and difficult moments — at your own pace, in your own time.',
-    ctaPrimary: 'Explore Inner Peace',
-    ctaSecondary: 'Start Feeling Better',
+    ctaPrimary: 'Try Inner Peace',
+    ctaSecondary: 'Explore Tools',
     footnote: 'Educational and wellness information only — not a substitute for professional care.',
   },
   ar: {
@@ -18,8 +18,8 @@ const copy = {
     slogan: 'اعثر على هدوئك.',
     description:
       'يقدّم "إنر بيس" أدوات عملية، ومعلومات واضحة، وإرشادًا لطيفًا لمن يمرّون بالقلق أو التوتر أو لحظات صعبة — بالوتيرة التي تناسبك، وفي وقتك الخاص.',
-    ctaPrimary: 'استكشف إنر بيس',
-    ctaSecondary: 'ابدأ الشعور بتحسن',
+    ctaPrimary: 'جرّب إنر بيس',
+    ctaSecondary: 'استكشف الأدوات',
     footnote: 'معلومات تثقيفية وصحية فقط — وليست بديلاً عن الرعاية المتخصصة.',
   },
 }
@@ -45,36 +45,36 @@ export default function Hero() {
           {t.badge}
         </p>
 
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-medium text-ink leading-[1.1] text-balance max-w-3xl mx-auto mb-4">
+        <p className="font-serif italic text-lg md:text-xl text-sage-dark mb-3">{t.slogan}</p>
+
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-medium text-ink leading-[1.1] text-balance max-w-3xl mx-auto mb-6">
           {t.title}
         </h1>
-
-        <p className="font-serif italic text-xl md:text-2xl text-sage-dark mb-6">{t.slogan}</p>
 
         <p className="text-lg text-ink-soft max-w-xl mx-auto leading-relaxed text-balance mb-10">
           {t.description}
         </p>
 
-        <div className="max-w-3xl mx-auto mb-10 rounded-[28px] overflow-hidden shadow-soft-lg">
-          <HeroIllustration />
-        </div>
-
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
           <a
-            href="#understanding"
+            href="#right-now"
             className="w-full sm:w-auto rounded-full bg-ink text-cream px-7 py-3 text-sm font-medium hover:bg-ink/90 transition-colors shadow-soft"
           >
             {t.ctaPrimary}
           </a>
           <a
             href="#tools"
-            className="w-full sm:w-auto rounded-full bg-white/80 border border-ink/10 text-ink px-7 py-3 text-sm font-medium hover:bg-white transition-colors"
+            className="w-full sm:w-auto rounded-full border border-ink/20 text-ink px-7 py-3 text-sm font-medium hover:bg-white/60 transition-colors"
           >
             {t.ctaSecondary}
           </a>
         </div>
 
-        <p className="text-xs text-ink-soft/70 mt-8 max-w-md mx-auto">{t.footnote}</p>
+        <div className="max-w-3xl mx-auto mb-10 rounded-[28px] overflow-hidden shadow-soft-lg">
+          <HeroIllustration />
+        </div>
+
+        <p className="text-xs text-ink-soft/70 max-w-md mx-auto">{t.footnote}</p>
       </div>
     </section>
   )

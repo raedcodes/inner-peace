@@ -1,6 +1,6 @@
 import SectionHeading from '../components/SectionHeading'
 import InformationCard from '../components/InformationCard'
-import { psychosomaticCards, psychosomaticReassurance } from '../data/psychosomatic'
+import { cyberchondriaNote, psychosomaticCards, psychosomaticReassurance } from '../data/psychosomatic'
 import { useLanguage } from '../i18n/LanguageContext'
 
 const copy = {
@@ -22,17 +22,26 @@ export default function Psychosomatic() {
   const { lang } = useLanguage()
   const t = copy[lang]
   const cards = psychosomaticCards[lang]
+  const note = cyberchondriaNote[lang]
 
   return (
     <section id="psychosomatic" className="max-w-6xl mx-auto px-5 md:px-8 py-16 md:py-24 scroll-mt-20">
       <SectionHeading eyebrow={t.eyebrow} title={t.title} description={t.description} />
 
-      <div className="grid sm:grid-cols-2 gap-5 mb-8">
+      <div className="grid sm:grid-cols-2 gap-5 mb-5">
         {cards.map((card) => (
           <InformationCard key={card.title} title={card.title} icon={card.icon}>
             {card.text}
           </InformationCard>
         ))}
+      </div>
+
+      <div className="flex items-start gap-3 bg-white/60 border border-ink/5 rounded-2xl px-5 py-4 mb-8">
+        <span className="text-xl shrink-0" aria-hidden="true">{note.icon}</span>
+        <div>
+          <p className="text-sm font-medium text-ink mb-1">{note.title}</p>
+          <p className="text-sm text-ink-soft leading-relaxed">{note.body}</p>
+        </div>
       </div>
 
       <p className="text-sm text-ink-soft leading-relaxed max-w-2xl bg-white/60 border border-ink/5 rounded-2xl px-5 py-4">
