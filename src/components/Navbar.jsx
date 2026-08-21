@@ -5,7 +5,16 @@ import Button from './Button'
 const copy = {
   en: {
     aiGuide: { href: '#right-now', label: 'AI Guide' },
-    toolsLink: { href: '#tools', label: 'Tools' },
+    toolsLabel: 'Tools',
+    toolsLinks: [
+      { href: '#tools', label: 'All Tools' },
+      { href: '#tool-breathing', label: 'Breathing Exercise' },
+      { href: '#tool-relaxation-timer', label: 'Relaxation Timer' },
+      { href: '#tool-mood-tracker', label: 'Mood Tracker' },
+      { href: '#tool-calm-audio', label: 'Calm Audio' },
+      { href: '#tool-fidget-pad', label: 'Fidget Pad' },
+      { href: '#tool-dissolver', label: 'Thought Dissolver' },
+    ],
     learnLabel: 'Learn',
     learnLinks: [
       { href: '#understanding', label: 'Understanding Anxiety' },
@@ -22,7 +31,16 @@ const copy = {
   },
   ar: {
     aiGuide: { href: '#right-now', label: 'الدليل الذكي' },
-    toolsLink: { href: '#tools', label: 'أدوات' },
+    toolsLabel: 'أدوات',
+    toolsLinks: [
+      { href: '#tools', label: 'كل الأدوات' },
+      { href: '#tool-breathing', label: 'تمرين التنفس' },
+      { href: '#tool-relaxation-timer', label: 'مؤقّت الاسترخاء' },
+      { href: '#tool-mood-tracker', label: 'متتبع المزاج' },
+      { href: '#tool-calm-audio', label: 'أصوات هادئة' },
+      { href: '#tool-fidget-pad', label: 'لوحة التسلية' },
+      { href: '#tool-dissolver', label: 'مذيب الأفكار' },
+    ],
     learnLabel: 'تعلّم',
     learnLinks: [
       { href: '#understanding', label: 'فهم القلق' },
@@ -63,7 +81,7 @@ function LanguageSwitch({ lang, setLang, className = '' }) {
   )
 }
 
-function LearnDropdown({ label, links }) {
+function NavDropdown({ label, links }) {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
 
@@ -128,6 +146,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [learnMobileOpen, setLearnMobileOpen] = useState(false)
+  const [toolsMobileOpen, setToolsMobileOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -165,13 +184,11 @@ export default function Navbar() {
               {t.aiGuide.label}
             </a>
           </li>
-          <li className="shrink-0">
-            <a href={t.toolsLink.href} className="text-sm text-ink-soft hover:text-ink transition-colors whitespace-nowrap">
-              {t.toolsLink.label}
-            </a>
+          <li>
+            <NavDropdown label={t.toolsLabel} links={t.toolsLinks} />
           </li>
           <li>
-            <LearnDropdown label={t.learnLabel} links={t.learnLinks} />
+            <NavDropdown label={t.learnLabel} links={t.learnLinks} />
           </li>
           <li className="shrink-0">
             <a href={t.contactLink.href} className="text-sm text-ink-soft hover:text-ink transition-colors whitespace-nowrap">
@@ -223,9 +240,30 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href={t.toolsLink.href} onClick={closeMenu} className="block py-3 text-lg text-ink border-b border-ink/5">
-              {t.toolsLink.label}
-            </a>
+            <button
+              type="button"
+              onClick={() => setToolsMobileOpen((v) => !v)}
+              aria-expanded={toolsMobileOpen}
+              className="w-full flex items-center justify-between py-3 text-lg text-ink border-b border-ink/5"
+            >
+              {t.toolsLabel}
+              <span aria-hidden="true" className={`text-sm transition-transform ${toolsMobileOpen ? 'rotate-180' : ''}`}>▾</span>
+            </button>
+            {toolsMobileOpen && (
+              <ul className="ps-4 pb-2">
+                {t.toolsLinks.map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      onClick={closeMenu}
+                      className="block py-2.5 text-base text-ink-soft"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
           <li>
             <button

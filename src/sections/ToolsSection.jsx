@@ -55,7 +55,7 @@ export default function ToolsSection() {
             <RelaxationTimer />
           </ToolCard>
 
-          <ToolCard title={t.cards[2].title} description={t.cards[2].description} icon={t.cards[2].icon}>
+          <ToolCard id="tool-mood-tracker" title={t.cards[2].title} description={t.cards[2].description} icon={t.cards[2].icon}>
             <MoodTracker />
           </ToolCard>
 
@@ -63,11 +63,11 @@ export default function ToolsSection() {
             <CalmAudioPlayer />
           </ToolCard>
 
-          <ToolCard title={t.cards[4].title} description={t.cards[4].description} icon={t.cards[4].icon}>
+          <ToolCard id="tool-fidget-pad" title={t.cards[4].title} description={t.cards[4].description} icon={t.cards[4].icon}>
             <FidgetPad />
           </ToolCard>
 
-          <ToolCard title={t.cards[5].title} description={t.cards[5].description} icon={t.cards[5].icon}>
+          <ToolCard id="tool-dissolver" title={t.cards[5].title} description={t.cards[5].description} icon={t.cards[5].icon}>
             <ThoughtDissolver />
           </ToolCard>
         </div>
