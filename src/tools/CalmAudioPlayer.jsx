@@ -7,12 +7,12 @@ const sessions = {
   en: [
     { id: 'relaxation', title: 'Relaxation', file: '/audio/relaxation.mp3' },
     { id: 'sleep-relaxation', title: 'Sleep Relaxation', file: '/audio/sleep-relaxation.mp3' },
-    { id: 'calm-background', title: 'Calm Background Sounds', file: '/audio/calm-background.mp3' },
+    { id: 'calm-background', title: 'Calm Background', file: '/audio/calm-background.mp3' },
   ],
   ar: [
     { id: 'relaxation', title: 'استرخاء', file: '/audio/relaxation.mp3' },
     { id: 'sleep-relaxation', title: 'استرخاء للنوم', file: '/audio/sleep-relaxation.mp3' },
-    { id: 'calm-background', title: 'أصوات خلفية هادئة', file: '/audio/calm-background.mp3' },
+    { id: 'calm-background', title: 'خلفية هادئة', file: '/audio/calm-background.mp3' },
   ],
 }
 
